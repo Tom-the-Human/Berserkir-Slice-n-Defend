@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cidgwcdnb1tb3"]
+
+[ext_resource type="Script" uid="uid://dy65iu1ob0qtg" path="res://Touch-combat/swipe_trail.gd" id="1_5yh6k"]
+[ext_resource type="Script" uid="uid://b5kwfsfh38w6m" path="res://Core/main.gd" id="1_cj3ed"]
+[ext_resource type="Texture2D" uid="uid://dai3csfyicr2j" path="res://icon.svg" id="2_n0dd3"]
+[ext_resource type="Script" uid="uid://celh63hooo8ov" path="res://Core/test_target.gd" id="3_n0dd3"]
+
+[node name="Main" type="Node2D" unique_id=1991437905]
+position = Vector2(1, 0)
+script = ExtResource("1_cj3ed")
+
+[node name="SwipeTrail" type="Line2D" parent="." unique_id=45593343]
+script = ExtResource("1_5yh6k")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=562635172]
+position = Vector2(400, 334)
+texture = ExtResource("2_n0dd3")
+polygon = PackedVector2Array(-60.461525, -62.30768, 71.89436, -62.721474, 71.89436, 64.39923, -61.40576, 64.39923)
+uv = PackedVector2Array(-0.16281128, 0.5559845, 126.83719, 1.5559845, 126.83719, 127.555984, -0.16281128, 127.555984)
+script = ExtResource("3_n0dd3")
