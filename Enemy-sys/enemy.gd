@@ -30,6 +30,7 @@ func _ready() -> void:
 	end_pos = Vector2(center_x + (spawn_offset * spread_multiplier), 1152.0)
 	
 	position = start_pos
+	scale = Vector2(0.1, 0.1)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -63,13 +64,17 @@ func apply_cut(swipe_points: PackedVector2Array) -> void:
 		queue_free()
 
 func create_falling_rigidbody(points: PackedVector2Array) -> void:
+	var scaled_points := PackedVector2Array()
+	for pt in points:
+		scaled_points.append(pt * self.scale)
+	
 	var rb := RigidBody2D.new()
 	var poly := Polygon2D.new()
 	var col := CollisionPolygon2D.new()
 	
-	poly.polygon = points
+	poly.polygon = scaled_points
 	poly.color = Color.DARK_RED
-	col.polygon = points
+	col.polygon = scaled_points
 
 	rb.add_child(poly)
 	rb.add_child(col)
