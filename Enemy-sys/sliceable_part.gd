@@ -1,5 +1,5 @@
 extends Node2D
-class_name Sliceable_Part
+class_name SliceablePart
 
 # signal to parent node that shield/armor is gone
 signal destroyed
@@ -19,10 +19,12 @@ func apply_cut(swipe_points: PackedVector2Array) -> bool:
 	
 	var sliced_pieces := Slicer.slice_polygon_curved(polygon_node.polygon, local_points)
 	
-	if sliced_pieces.size() > 1:
+	if sliced_pieces.size() > 0:
 		is_broken = true # Prevent double-cutting in the same frame (reconsider?)
+		
+		var swipe_dir := (swipe_points[swipe_points.size() - 1] - swipe_points[0]).normalized()
 		for piece_points in sliced_pieces:
-			create_falling_rigidbody(piece_points)
+			create_falling_rigidbody(piece_points, swipe_dir)
 		
 		destroyed.emit()
 		queue_free()
@@ -30,13 +32,24 @@ func apply_cut(swipe_points: PackedVector2Array) -> bool:
 	
 	return false
 
-func create_falling_rigidbody(points: PackedVector2Array) -> void:
+func create_falling_rigidbody(points: PackedVector2Array, swipe_dir: Vector2) -> void:
 	var scaled_points := PackedVector2Array()
 	for pt in points:
 		# global_scale so it inherits the 3D perspective scale from the Enemy
 		scaled_points.append(pt * global_scale)
 		
 	var rb := RigidBody2D.new()
+	# attach self-cleanup script
+	var cleanup = GDScript.new()
+	cleanup.source_code = """
+extends RigidBody2D
+func _process(_delta) -> void:
+	if global_position.y > 2500:
+		queue_free()
+	"""
+	cleanup.reload()
+	rb.set_script(cleanup)
+	
 	var poly := Polygon2D.new()
 	var col := CollisionPolygon2D.new()
 	
@@ -57,11 +70,15 @@ func create_falling_rigidbody(points: PackedVector2Array) -> void:
 	rb.add_child(poly)
 	rb.add_child(col)
 	rb.global_position = global_position
-	
 	# Grab the z_index from the parent Enemy so it layers correctly
-	rb.z_index = get_parent().z_index + 1
+	rb.z_index = get_parent().z_index
 	
-	rb.apply_central_impulse(Vector2(randf_range(-100, 100), randf_range(-50, -150)))
+	# calc directional impulse and apply torque
+	var base_force := swipe_dir * 500.0
+	var random_variance := Vector2(randf_range(-100, 100), randf_range(-50, -150))
+	
+	rb.apply_central_impulse(base_force + random_variance)
+	rb.apply_torque_impulse(sign(swipe_dir.x) * randf_range(1000.0, 3000.0))
 	
 	# Send it to the Main scene so it doesn't keep charging forward with the surviving Enemy
 	get_tree().current_scene.add_child(rb)

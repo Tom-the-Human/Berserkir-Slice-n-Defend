@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://r8b4i7cgbtyu" path="res://Enemy-sys/spearman.tscn" id="6_84tve"]
 
 [node name="Main" type="Node2D" unique_id=1991437905]
+y_sort_enabled = true
 script = ExtResource("1_cj3ed")
 
 [node name="SwipeTrail" type="Line2D" parent="." unique_id=45593343]

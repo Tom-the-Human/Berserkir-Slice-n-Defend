@@ -1,7 +1,9 @@
 extends Area2D
 class_name Enemy
 
-signal attacked_player(damage_amount: int)
+signal attacked_player(damage_amount: int) # when progress reaches 1.0
+signal killed # when Body is_broken
+signal part_broken # when ANY component breaks
 
 var progress := 0.0 # 0.0 at horizon, 1.0 at player
 @export var speed := 0.2 # adjust as needed
@@ -44,6 +46,11 @@ func _ready() -> void:
 	outline_line.default_color = Color(1.5, 0.2, 0.2) # Over-bright red for a subtle glow effect
 	# Add it as a child of the polygon so it perfectly overlaps
 	polygon_node.add_child(outline_line)
+	
+	# for all parts, if sliceable, connect signal
+	for child in get_children():
+		if child is SliceablePart:
+			child.destroyed.connect(func(): part_broken.emit())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -86,9 +93,10 @@ func apply_cut(swipe_points: PackedVector2Array) -> void:
 	# check for armor
 	var armor = get_node_or_null("Armor")
 	if armor and not armor.is_broken:
-		armor.apply_cut(swipe_points)
-		apply_knockback()
-		return
+		var hit_armor = armor.apply_cut(swipe_points)
+		if hit_armor:
+			apply_knockback()
+			return
 	
 	# if no protection
 	var body = get_node_or_null("Body")
@@ -113,5 +121,5 @@ func apply_knockback() -> void:
 		outline_line.width = 0.0
 
 func die() -> void:
-	# TODO: hook up to kill counter, etc.
+	killed.emit()
 	queue_free()

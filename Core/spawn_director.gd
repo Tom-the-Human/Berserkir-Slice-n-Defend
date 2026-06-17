@@ -1,6 +1,16 @@
 extends Node2D
 
 signal enemy_spawned(enemy_node: Enemy)
+var spawn_phases = [
+	{"time": 10.0,   "peasant": 1.0,  "spearman": 1.0},
+	{"time": 30.0,   "peasant": 0.75, "spearman": 1.0},
+	{"time": 60.0,   "peasant": 0.50, "spearman": 1.0},
+	{"time": 90.0,   "peasant": 0.30, "spearman": 0.90},
+	{"time": 120.0,  "peasant": 0.10, "spearman": 0.70},
+	{"time": 150.0,  "peasant": 0.05, "spearman": 0.50},
+	{"time": 180.0,  "peasant": 0.00, "spearman": 0.25},
+	{"time": 9999.0, "peasant": 0.00, "spearman": 0.10} # Endless Endgame
+] # will default to housecarl if roll outside defined range
 
 @export var peasant: PackedScene
 @export var spearman: PackedScene
@@ -39,49 +49,66 @@ func _on_pacing_update() -> void:
 func _spawn_enemy() -> void:
 	var enemy_to_spawn: PackedScene
 	var roll := randf() # 0.0 to 1.0
+	var current_phase = spawn_phases.back() # default to hardest phase
+	for phase in spawn_phases:
+		if run_time_seconds < phase.time:
+			current_phase = phase
+			break
 	
-	###########
-	# TODO: this should probably be refactored to a dict or something
-	# change spawn chances over time
-	if run_time_seconds < 10.0:
+	if roll < current_phase.peasant:
 		enemy_to_spawn = peasant
-	elif run_time_seconds < 30.0:
-		if roll < 0.75:
-			enemy_to_spawn = peasant
-		else:
-			enemy_to_spawn = spearman
-	elif run_time_seconds < 60.0:
-		if roll < 0.5:
-			enemy_to_spawn = peasant
-		else:
-			enemy_to_spawn = spearman
-	elif run_time_seconds < 90.0:
-		if roll < 0.3:
-			enemy_to_spawn = peasant
-		elif roll < 0.9:
-			enemy_to_spawn = spearman
-		else:
-			enemy_to_spawn = housecarl
-	elif run_time_seconds < 120.0:
-		if roll < 0.1:
-			enemy_to_spawn = peasant
-		elif roll < 0.7:
-			enemy_to_spawn = spearman
-		else:
-			enemy_to_spawn = housecarl
-	elif run_time_seconds < 150.0:
-		if roll < 0.05:
-			enemy_to_spawn = peasant
-		elif roll < 0.5:
-			enemy_to_spawn = spearman
-		else:
-			enemy_to_spawn = housecarl
-	elif run_time_seconds < 180.0:
-		if roll < 0.25:
-			enemy_to_spawn = spearman
-		else:
-			enemy_to_spawn = housecarl
-	#########
+	elif roll < current_phase.spearman:
+		enemy_to_spawn = spearman
+	else:
+		enemy_to_spawn = housecarl
+	
+	############
+	## TODO: this should probably be refactored to a dict or something
+	## change spawn chances over time
+	#if run_time_seconds < 10.0:
+		#enemy_to_spawn = peasant
+	#elif run_time_seconds < 30.0:
+		#if roll < 0.75:
+			#enemy_to_spawn = peasant
+		#else:
+			#enemy_to_spawn = spearman
+	#elif run_time_seconds < 60.0:
+		#if roll < 0.5:
+			#enemy_to_spawn = peasant
+		#else:
+			#enemy_to_spawn = spearman
+	#elif run_time_seconds < 90.0:
+		#if roll < 0.3:
+			#enemy_to_spawn = peasant
+		#elif roll < 0.9:
+			#enemy_to_spawn = spearman
+		#else:
+			#enemy_to_spawn = housecarl
+	#elif run_time_seconds < 120.0:
+		#if roll < 0.1:
+			#enemy_to_spawn = peasant
+		#elif roll < 0.7:
+			#enemy_to_spawn = spearman
+		#else:
+			#enemy_to_spawn = housecarl
+	#elif run_time_seconds < 150.0:
+		#if roll < 0.05:
+			#enemy_to_spawn = peasant
+		#elif roll < 0.5:
+			#enemy_to_spawn = spearman
+		#else:
+			#enemy_to_spawn = housecarl
+	#elif run_time_seconds < 180.0:
+		#if roll < 0.25:
+			#enemy_to_spawn = spearman
+		#else:
+			#enemy_to_spawn = housecarl
+	#else:
+		#if roll < 0.1:
+			#enemy_to_spawn = spearman
+		#else:
+			#enemy_to_spawn= housecarl
+	##########
 	
 	# instantiate and add enemy to scene
 	if enemy_to_spawn:
