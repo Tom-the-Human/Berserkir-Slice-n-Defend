@@ -49,7 +49,7 @@ func create_falling_rigidbody(points: PackedVector2Array) -> void:
 	var edge_glow := Line2D.new()
 	edge_glow.points = scaled_points
 	edge_glow.closed = true
-	edge_glow.width = 5.0 * global_scale.x 
+	edge_glow.width = 1.5 * global_scale.x 
 	edge_glow.default_color = Color(2.0, 0.2, 0.2) 
 	rb.add_child(edge_glow)
 	######################

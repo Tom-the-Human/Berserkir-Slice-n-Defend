@@ -62,7 +62,7 @@ func _process(delta: float) -> void:
 		# debug
 		print("hit zone entered")
 		# change outline_width to make visible
-		outline_line.width = 2.5
+		outline_line.width = 1.5
 	
 	if progress >= 1.0:
 		hit_player()

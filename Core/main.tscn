@@ -3,18 +3,26 @@
 [ext_resource type="Script" uid="uid://dy65iu1ob0qtg" path="res://Touch-combat/swipe_trail.gd" id="1_5yh6k"]
 [ext_resource type="Script" uid="uid://b5kwfsfh38w6m" path="res://Core/main.gd" id="1_cj3ed"]
 [ext_resource type="PackedScene" uid="uid://qnlp2lgq410r" path="res://Enemy-sys/housecarl.tscn" id="2_n0dd3"]
+[ext_resource type="Script" uid="uid://g7lf3ba4rkob" path="res://Core/spawn_director.gd" id="4_avlqc"]
+[ext_resource type="PackedScene" uid="uid://bun0584ros584" path="res://Enemy-sys/peasant.tscn" id="5_okbgg"]
+[ext_resource type="PackedScene" uid="uid://r8b4i7cgbtyu" path="res://Enemy-sys/spearman.tscn" id="6_84tve"]
 
 [node name="Main" type="Node2D" unique_id=1991437905]
-position = Vector2(1, 0)
 script = ExtResource("1_cj3ed")
-enemy_scene = ExtResource("2_n0dd3")
 
 [node name="SwipeTrail" type="Line2D" parent="." unique_id=45593343]
 z_index = 150
 z_as_relative = false
 script = ExtResource("1_5yh6k")
 
-[node name="EnemySpawnTimer" type="Timer" parent="." unique_id=796545954]
+[node name="SpawnDirector" type="Node2D" parent="." unique_id=958982004]
+script = ExtResource("4_avlqc")
+peasant = ExtResource("5_okbgg")
+spearman = ExtResource("6_84tve")
+housecarl = ExtResource("2_n0dd3")
+
+[node name="PacingTimer" type="Timer" parent="SpawnDirector" unique_id=997723240]
 autostart = true
 
-[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
+[node name="SpawnTimer" type="Timer" parent="SpawnDirector" unique_id=796545954]
+autostart = true
