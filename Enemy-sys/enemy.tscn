@@ -1,12 +1,16 @@
 [gd_scene format=3 uid="uid://djjuu0d421cg1"]
 
 [ext_resource type="Script" uid="uid://cdngpna4tpe23" path="res://Enemy-sys/enemy.gd" id="1_h4rym"]
+[ext_resource type="Script" uid="uid://rs36gbbcnll6" path="res://Enemy-sys/sliceable_part.gd" id="2_qhfmm"]
 
 [node name="Enemy" type="Area2D" unique_id=1703952146]
 script = ExtResource("1_h4rym")
 
-[node name="Polygon2D" type="Polygon2D" parent="." unique_id=711442672]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=2022778578]
 polygon = PackedVector2Array(-32, -64, 32, -64, 32, 64, -32, 64)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=2022778578]
+[node name="Body" type="Node2D" parent="." unique_id=1917326645]
+script = ExtResource("2_qhfmm")
+
+[node name="Polygon2D" type="Polygon2D" parent="Body" unique_id=711442672]
 polygon = PackedVector2Array(-32, -64, 32, -64, 32, 64, -32, 64)

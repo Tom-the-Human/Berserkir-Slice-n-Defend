@@ -2,14 +2,16 @@
 
 [ext_resource type="Script" uid="uid://dy65iu1ob0qtg" path="res://Touch-combat/swipe_trail.gd" id="1_5yh6k"]
 [ext_resource type="Script" uid="uid://b5kwfsfh38w6m" path="res://Core/main.gd" id="1_cj3ed"]
-[ext_resource type="PackedScene" uid="uid://djjuu0d421cg1" path="res://Enemy-sys/enemy.tscn" id="2_xdvn6"]
+[ext_resource type="PackedScene" uid="uid://qnlp2lgq410r" path="res://Enemy-sys/housecarl.tscn" id="2_n0dd3"]
 
 [node name="Main" type="Node2D" unique_id=1991437905]
 position = Vector2(1, 0)
 script = ExtResource("1_cj3ed")
-enemy_scene = ExtResource("2_xdvn6")
+enemy_scene = ExtResource("2_n0dd3")
 
 [node name="SwipeTrail" type="Line2D" parent="." unique_id=45593343]
+z_index = 150
+z_as_relative = false
 script = ExtResource("1_5yh6k")
 
 [node name="EnemySpawnTimer" type="Timer" parent="." unique_id=796545954]

@@ -9,7 +9,7 @@ var progress := 0.0 # 0.0 at horizon, 1.0 at player
 var start_pos : Vector2 
 var end_pos : Vector2 # Forground/hit zone
 
-@onready var polygon_node: Polygon2D = $Polygon2D
+@onready var polygon_node: Polygon2D = $Body/Polygon2D
 
 # hit zone entered outline
 var outline_line: Line2D
@@ -21,14 +21,14 @@ func _ready() -> void:
 	
 	# army width (pick random spot in army at horizon)
 	# TWEAK THIS TO MATCH ART!!!
-	var spawn_offset := randf_range(-250.0, 250.0)
+	var spawn_offset := randf_range(-350.0, 350.0)
 	#############################################
 	
 	# horizon is 576
 	start_pos = Vector2(center_x + spawn_offset, 576.0)
 	
 	# spread multiplier (adjust to make them filter onto the bridge, not necessarily center)
-	var spread_multiplier := 1.0
+	var spread_multiplier := -0.9
 	
 	# foreground Y is 1152
 	end_pos = Vector2(center_x + (spawn_offset * spread_multiplier), 1152.0)
@@ -54,6 +54,9 @@ func _process(delta: float) -> void:
 	var scale_factor : Variant = lerp(0.1, 10.0, perspective_curve)
 	scale = Vector2(scale_factor, scale_factor)
 	
+	# control draw order
+	z_index = int(progress * 100)
+	
 	if progress >= 0.75 and not in_hit_zone:
 		in_hit_zone = true
 		# debug
@@ -71,35 +74,44 @@ func hit_player() -> void:
 func apply_cut(swipe_points: PackedVector2Array) -> void:
 	if progress < 0.75:
 		return
-		
-	var local_points := PackedVector2Array()
-	for pt in swipe_points:
-		local_points.append(to_local(pt))
 	
-	var sliced_pieces := Slicer.slice_polygon_curved(polygon_node.polygon, local_points)
+	# check for shield
+	var shield = get_node_or_null("Shield")
+	if shield and not shield.is_broken:
+		var hit_shield = shield.apply_cut(swipe_points)
+		if hit_shield:
+			apply_knockback()
+			return
 	
-	if sliced_pieces.size() > 1:
-		for piece_points in sliced_pieces:
-			create_falling_rigidbody(piece_points)
-		queue_free()
+	# check for armor
+	var armor = get_node_or_null("Armor")
+	if armor and not armor.is_broken:
+		armor.apply_cut(swipe_points)
+		apply_knockback()
+		return
+	
+	# if no protection
+	var body = get_node_or_null("Body")
+	if body and not body.is_broken:
+		body.apply_cut(swipe_points)
+		die()
 
-func create_falling_rigidbody(points: PackedVector2Array) -> void:
-	var scaled_points := PackedVector2Array()
-	for pt in points:
-		scaled_points.append(pt * self.scale)
+func apply_knockback() -> void:
+	# push enemy back when hit but not killed
+	progress = max(0.0, progress - 0.2)
 	
-	var rb := RigidBody2D.new()
-	var poly := Polygon2D.new()
-	var col := CollisionPolygon2D.new()
+	# update scale and position
+	position = start_pos.lerp(end_pos, progress)
+	var perspective_curve := pow(progress, 3)
+	var scale_factor : float = lerp(0.1, 10.0, perspective_curve)
+	scale = Vector2(scale_factor, scale_factor)
+	z_index = int(progress * 100)
 	
-	poly.polygon = scaled_points
-	# try to implement texture later (UV maps)
-	poly.color = Color.DARK_RED
-	col.polygon = scaled_points
+	if progress < 0.75:
+		# no longer in hit zone
+		in_hit_zone = false
+		outline_line.width = 0.0
 
-	rb.add_child(poly)
-	rb.add_child(col)
-	rb.global_position = global_position
-	
-	rb.apply_central_impulse(Vector2(randf_range(-100, 100), randf_range(-50, -150)))
-	get_parent().add_child(rb)
+func die() -> void:
+	# TODO: hook up to kill counter, etc.
+	queue_free()

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dn0q4fh5cr1sc"]
+
+[ext_resource type="Script" uid="uid://rs36gbbcnll6" path="res://Enemy-sys/sliceable_part.gd" id="1_sb1r5"]
+
+[node name="ArmorComponent" type="Node2D" unique_id=949430781]
+script = ExtResource("1_sb1r5")
+part_color = Color(0.4862745, 0.45882353, 0.4745098, 1)
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1316496790]
+color = Color(0.4862745, 0.45882353, 0.4745098, 1)
+polygon = PackedVector2Array(-16, -32, 16, -32, 24, -16, 14, 16, 12, 32, -12, 32, -14, 16, -24, -16)

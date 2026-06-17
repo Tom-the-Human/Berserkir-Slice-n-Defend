@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://qnlp2lgq410r"]
+
+[ext_resource type="PackedScene" uid="uid://djjuu0d421cg1" path="res://Enemy-sys/enemy.tscn" id="1_ss7bi"]
+[ext_resource type="PackedScene" uid="uid://dn0q4fh5cr1sc" path="res://Enemy-sys/armor_component.tscn" id="2_uu080"]
+[ext_resource type="PackedScene" uid="uid://dl5tu8xomdw1b" path="res://Enemy-sys/shield_component.tscn" id="3_sflf5"]
+
+[node name="Housecarl" unique_id=1703952146 instance=ExtResource("1_ss7bi")]
+
+[node name="Armor" parent="." index="2" unique_id=949430781 instance=ExtResource("2_uu080")]
+position = Vector2(0, -5)
+
+[node name="Shield" parent="." index="3" unique_id=181454021 instance=ExtResource("3_sflf5")]
+position = Vector2(20, -14)

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://r8b4i7cgbtyu"]
+
+[ext_resource type="PackedScene" uid="uid://djjuu0d421cg1" path="res://Enemy-sys/enemy.tscn" id="1_xvy3y"]
+[ext_resource type="PackedScene" uid="uid://dl5tu8xomdw1b" path="res://Enemy-sys/shield_component.tscn" id="2_n128j"]
+
+[node name="Spearman" unique_id=1703952146 instance=ExtResource("1_xvy3y")]
+
+[node name="Shield" parent="." index="2" unique_id=181454021 instance=ExtResource("2_n128j")]
+position = Vector2(20, -14)
