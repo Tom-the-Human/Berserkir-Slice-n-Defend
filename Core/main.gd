@@ -1,9 +1,18 @@
 extends Node2D
 
+@onready var ui_manager = $UIManager
+@onready var hud = %HUD
+@onready var main_menu =  %MainMenu
+@onready var pause_screen = %PauseScreen
+@onready var game_over_screen = %GameOverScreen
+
+@onready var stats_label = %StatsLabel # shown at
+
 # FIXME: this needs to be split into a max health and current health
-# max health will be upgradable, so needs to be dynamic
+# max health will be upgradable, so needs to be dynamic (Global?)
 var player_health := 100 
 
+# FIXME: these vars need to be Global
 var total_glory := 0   # all runs
 var current_glory := 0 # wallet
 var total_kills := 0   # all runs
@@ -17,19 +26,32 @@ var run_time_str := ""
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$SpawnDirector.enemy_spawned.connect(_on_enemy_spawned)
-	start_new_run()
+	get_tree().paused = true
+	
+	hud.hide()
+	pause_screen.hide()
+	game_over_screen.hide()
+	main_menu.show()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
 
 func start_new_run() -> void:
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		enemy.queue_free()
+	# DEBUG
+	print("Run started")
 	run_glory = 0
 	run_kills = 0
 	run_start_time = Time.get_ticks_msec()
 	player_health = 100 # FIXME
-	# DEBUG
-	print("Run started")
+	
+	main_menu.hide()
+	game_over_screen.hide()
+	hud.show()
+	
+	get_tree().paused = false
+	$SpawnDirector/PacingTimer.start()
+	$SpawnDirector/SpawnTimer.start()
+	
 
 func _on_enemy_spawned(new_enemy: Enemy) -> void:
 	# send SwipeTrail coords to enemy
@@ -43,10 +65,6 @@ func _on_enemy_spawned(new_enemy: Enemy) -> void:
 	new_enemy.part_broken.connect(_on_part_broken)
 
 func _on_player_damaged(damage: int) -> void:
-	player_health -= damage
-	# debug/placeholder
-	print("Hit! Player health now ", player_health)
-	
 	if player_health <= 0:
 		# get run time
 		var run_end_time := Time.get_ticks_msec()
@@ -56,18 +74,50 @@ func _on_player_damaged(damage: int) -> void:
 		var seconds := total_seconds % 60
 		run_time_str = "%d:%02d" % [minutes, seconds]
 		
-		# placeholder
-		print("Berserker has fallen!\nGAME OVER")
-		print("Run Summary -> Kills: ", run_kills, " | Glory: ", run_glory, " | Time: ", run_time_str)
-		# implement proper game over later, just end spawning for now
-		# will return player to menu
+		get_tree().paused = true
+		$SpawnDirector/PacingTimer.stop()
 		$SpawnDirector/SpawnTimer.stop()
+		stats_label.text = "Kills: %d | Glory: %d | Time: %s" % [run_kills, run_glory, run_time_str]
+		
+		hud.hide()
+		game_over_screen.show()
+	
+	
+	player_health -= damage
+	# debug/placeholder
+	print("Hit! Player health now ", player_health)
 
 func _on_enemy_killed() -> void:
-	total_kills += 1
-	# debug
-	print(total_kills)
+	run_kills += 1
+	total_kills +1
 
 func _on_part_broken() -> void:
+	run_glory += 1
 	total_glory += 1
-	print(total_glory)
+
+
+func _on_play_button_pressed() -> void:
+	start_new_run()
+
+func _on_upgrades_button_pressed() -> void:
+	pass # Replace with function body.
+	# TODO: Design and then hook up Upgrade Store
+
+func _on_settings_button_pressed() -> void:
+	pass # Replace with function body.
+	# TODO: Design and then hook up Settings Screen
+
+func _on_pause_button_pressed() -> void:
+	get_tree().paused = true
+	pause_screen.show()
+
+func _on_resume_button_pressed() -> void:
+	get_tree().paused = false
+	pause_screen.hide()
+
+func _on_menu_button_pressed() -> void:
+	get_tree().paused = true
+	pause_screen.hide()
+	game_over_screen.hide()
+	hud.hide()
+	main_menu.show()

@@ -1,6 +1,7 @@
 extends Node2D
 
 signal enemy_spawned(enemy_node: Enemy)
+
 var spawn_phases = [
 	{"time": 10.0,   "peasant": 1.0,  "spearman": 1.0},
 	{"time": 30.0,   "peasant": 0.75, "spearman": 1.0},
@@ -61,54 +62,6 @@ func _spawn_enemy() -> void:
 		enemy_to_spawn = spearman
 	else:
 		enemy_to_spawn = housecarl
-	
-	############
-	## TODO: this should probably be refactored to a dict or something
-	## change spawn chances over time
-	#if run_time_seconds < 10.0:
-		#enemy_to_spawn = peasant
-	#elif run_time_seconds < 30.0:
-		#if roll < 0.75:
-			#enemy_to_spawn = peasant
-		#else:
-			#enemy_to_spawn = spearman
-	#elif run_time_seconds < 60.0:
-		#if roll < 0.5:
-			#enemy_to_spawn = peasant
-		#else:
-			#enemy_to_spawn = spearman
-	#elif run_time_seconds < 90.0:
-		#if roll < 0.3:
-			#enemy_to_spawn = peasant
-		#elif roll < 0.9:
-			#enemy_to_spawn = spearman
-		#else:
-			#enemy_to_spawn = housecarl
-	#elif run_time_seconds < 120.0:
-		#if roll < 0.1:
-			#enemy_to_spawn = peasant
-		#elif roll < 0.7:
-			#enemy_to_spawn = spearman
-		#else:
-			#enemy_to_spawn = housecarl
-	#elif run_time_seconds < 150.0:
-		#if roll < 0.05:
-			#enemy_to_spawn = peasant
-		#elif roll < 0.5:
-			#enemy_to_spawn = spearman
-		#else:
-			#enemy_to_spawn = housecarl
-	#elif run_time_seconds < 180.0:
-		#if roll < 0.25:
-			#enemy_to_spawn = spearman
-		#else:
-			#enemy_to_spawn = housecarl
-	#else:
-		#if roll < 0.1:
-			#enemy_to_spawn = spearman
-		#else:
-			#enemy_to_spawn= housecarl
-	##########
 	
 	# instantiate and add enemy to scene
 	if enemy_to_spawn:

@@ -19,6 +19,7 @@ var in_hit_zone := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	add_to_group("enemies")
 	var center_x := 540.0
 	
 	# army width (pick random spot in army at horizon)
@@ -66,8 +67,6 @@ func _process(delta: float) -> void:
 	
 	if progress >= 0.75 and not in_hit_zone:
 		in_hit_zone = true
-		# debug
-		print("hit zone entered")
 		# change outline_width to make visible
 		outline_line.width = 1.5
 	
