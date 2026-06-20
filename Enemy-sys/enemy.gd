@@ -77,35 +77,45 @@ func hit_player() -> void:
 	attacked_player.emit(10)
 	queue_free()
 
-func apply_cut(swipe_points: PackedVector2Array) -> void:
-	if progress < 0.75:
-		return
+func apply_cut(swipe_points: PackedVector2Array, remaining_pierces: int) -> int:
+	if progress < 0.75 or remaining_pierces <= 0:
+		return remaining_pierces
 	
+	var parts_hit := 0
+		
 	# check for shield
 	var shield = get_node_or_null("Shield")
-	if shield and not shield.is_broken:
+	if remaining_pierces > 0 and shield and not shield.is_broken:
 		var hit_shield = shield.apply_cut(swipe_points)
 		if hit_shield:
-			apply_knockback()
-			return
+			remaining_pierces -= 1
+			parts_hit += 1
 	
 	# check for armor
 	var armor = get_node_or_null("Armor")
-	if armor and not armor.is_broken:
+	if remaining_pierces > 0 and armor and not armor.is_broken:
 		var hit_armor = armor.apply_cut(swipe_points)
 		if hit_armor:
-			apply_knockback()
-			return
+			remaining_pierces -= 1
+			parts_hit += 1
 	
 	# if no protection
 	var body = get_node_or_null("Body")
-	if body and not body.is_broken:
-		body.apply_cut(swipe_points)
-		die()
+	if remaining_pierces > 0 and body and not body.is_broken:
+		var hit_body = body.apply_cut(swipe_points)
+		if hit_body:
+			remaining_pierces -= 1
+			parts_hit += 1
+			die()
+	
+	if parts_hit > 0 and not is_queued_for_deletion():
+		apply_knockback()
+	
+	return remaining_pierces
 
 func apply_knockback() -> void:
 	# push enemy back when hit but not killed
-	progress = max(0.0, progress - 0.2)
+	progress = max(0.0, progress - Global.knockback)
 	
 	# update scale and position
 	position = start_pos.lerp(end_pos, progress)
