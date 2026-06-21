@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cr7auwplc84t6"]
+
+[ext_resource type="Script" uid="uid://hvrd4otk1aj2" path="res://wood_spray.gd" id="1_bbiug"]
+
+[node name="WoodSpray" type="CPUParticles2D" unique_id=351144879]
+emitting = false
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.97
+angle_min = -720.0
+angle_max = 720.0
+color = Color(0.54509807, 0.3529412, 0.16862746, 1)
+script = ExtResource("1_bbiug")

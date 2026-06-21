@@ -10,10 +10,13 @@ extends Node2D
 @onready var stats_label = %StatsLabel # shown at game over (probably rename)
 
 @onready var screen_blood = $UIManager/ScreenBlood
+@onready var damage_flash = $UIManager/DamageFlash
+@onready var camera = $Camera2D
+var current_shake_strength := 0.0
 
 var player_health := Global.max_health
 
-var run_glory := 0 
+var run_glory := 0
 var run_kills := 0
 
 var run_start_time := 0
@@ -30,6 +33,16 @@ func _ready() -> void:
 	game_over_screen.hide()
 	upgrade_store.hide()
 	main_menu.show()
+
+func _process(delta: float) -> void:
+	if current_shake_strength > 0:
+		# random offset camera by current strength
+		camera.offset = Vector2(
+			randf_range(-current_shake_strength, current_shake_strength),
+			randf_range(-current_shake_strength, current_shake_strength)
+		)
+		# rapidly degrade back to 0,0
+		current_shake_strength = lerpf(current_shake_strength, 0.0, 15.0 * delta)
 
 
 func start_new_run() -> void:
@@ -88,8 +101,29 @@ func _on_player_damaged(damage: int) -> void:
 		game_over_screen.show()
 	
 	player_health -= damage
+	trigger_player_hit_vfx()
 	# debug/placeholder
 	print("Hit! Player health now ", player_health)
+
+func trigger_player_hit_vfx() -> void:
+	var health_ratio: float = float(player_health) / float(Global.max_health)
+	# invert so 1.0 means dead, 0.0 means full health
+	var missing_health_ratio := 1.0 - health_ratio
+	
+	# screen shake
+	current_shake_strength = 10.0 + (40.0 * missing_health_ratio) # tweak!
+	
+	# damage flash
+	var dynamic_radius := lerpf(0.5, 0.0, missing_health_ratio)
+	damage_flash.material.set_shader_parameter("vignette_radius", dynamic_radius)
+	damage_flash.show()
+	var tween = create_tween()
+	# fade out is in secs, make very fast!
+	tween.tween_method(
+		func(val: float): damage_flash.material.set_shader_parameter("intensity", val),
+		1.0, 0.0, 0.3
+	)
+	tween.tween_callback(damage_flash.hide)
 
 func _on_enemy_killed() -> void:
 	run_kills += 1

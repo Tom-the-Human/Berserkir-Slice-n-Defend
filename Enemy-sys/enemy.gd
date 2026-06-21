@@ -13,6 +13,7 @@ var end_pos : Vector2 # Forground/hit zone
 
 @onready var polygon_node: Polygon2D = $Body/Polygon2D
 @export var blood_spray_scene: PackedScene
+@export var wood_spray_scene: PackedScene
 
 # hit zone entered outline
 var outline_line: Line2D
@@ -87,10 +88,18 @@ func apply_cut(swipe_points: PackedVector2Array, remaining_pierces: int, swipe_d
 	# check for shield
 	var shield = get_node_or_null("Shield")
 	if remaining_pierces > 0 and shield and not shield.is_broken:
-		var hit_shield = shield.apply_cut(swipe_points, swipe_dir)
-		if hit_shield:
+		var hit_shield_rb = shield.apply_cut(swipe_points, swipe_dir)
+		if hit_shield_rb:
 			remaining_pierces -= 1
 			parts_hit += 1
+			if wood_spray_scene:
+				var splinters = wood_spray_scene.instantiate()
+				var cut_pos = Geometry2D.get_closest_point_to_segment(shield.global_position, swipe_points[0], swipe_points[-1])
+				
+				hit_shield_rb.add_child(splinters)
+				splinters.global_position = cut_pos
+				splinters.z_index = hit_shield_rb.z_index + 1
+				splinters.spray(swipe_dir, scale.x)
 	
 	# check for armor
 	var armor = get_node_or_null("Armor")

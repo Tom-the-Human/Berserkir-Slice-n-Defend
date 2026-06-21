@@ -7,11 +7,21 @@
 [ext_resource type="PackedScene" uid="uid://bun0584ros584" path="res://Enemy-sys/peasant.tscn" id="5_okbgg"]
 [ext_resource type="PackedScene" uid="uid://r8b4i7cgbtyu" path="res://Enemy-sys/spearman.tscn" id="6_84tve"]
 [ext_resource type="Shader" uid="uid://dapbwnu5tjnlo" path="res://VFX/screen_blood.gdshader" id="7_okbgg"]
+[ext_resource type="Shader" uid="uid://be3wbsm1760l" path="res://VFX/damage_flash.gdshader" id="8_84tve"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_84tve"]
 shader = ExtResource("7_okbgg")
 shader_parameter/drip_amount = 0.0
 shader_parameter/blood_color = Color(0.6, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c1vl6"]
+shader = ExtResource("8_84tve")
+shader_parameter/intensity = 0.0
+shader_parameter/vignette_radius = 0.5
+shader_parameter/vignette_softness = 0.5
+shader_parameter/color1 = Color(1, 0, 0, 1)
+shader_parameter/color2 = Color(1, 1, 1, 1)
+shader_parameter/flash_speed = 30.0
 
 [node name="Main" type="Node2D" unique_id=1991437905]
 y_sort_enabled = true
@@ -36,6 +46,24 @@ autostart = true
 
 [node name="UIManager" type="CanvasLayer" parent="." unique_id=1858374009]
 process_mode = 3
+
+[node name="ScreenBlood" type="ColorRect" parent="UIManager" unique_id=65117965]
+visible = false
+material = SubResource("ShaderMaterial_84tve")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DamageFlash" type="ColorRect" parent="UIManager" unique_id=27043387]
+visible = false
+material = SubResource("ShaderMaterial_c1vl6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HUD" type="Control" parent="UIManager" unique_id=390099392]
 unique_name_in_owner = true
@@ -141,11 +169,12 @@ text = "Quit to Menu"
 
 [node name="GameOverScreen" type="Control" parent="UIManager" unique_id=313627088]
 unique_name_in_owner = true
-visible = false
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -178,9 +207,15 @@ text = "Main Menu"
 [node name="UpgradeStore" type="Control" parent="UIManager" unique_id=39273100]
 unique_name_in_owner = true
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UIManager/UpgradeStore" unique_id=563822460]
 layout_mode = 0
@@ -215,14 +250,8 @@ text = "Brute Force
 layout_mode = 2
 text = "Back"
 
-[node name="ScreenBlood" type="ColorRect" parent="UIManager" unique_id=65117965]
-visible = false
-material = SubResource("ShaderMaterial_84tve")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Camera2D" type="Camera2D" parent="." unique_id=923471005]
+anchor_mode = 0
 
 [connection signal="pressed" from="UIManager/HUD/MarginContainer/HBoxContainer/PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="UIManager/MainMenu/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
