@@ -9,9 +9,9 @@ signal destroyed
 @onready var polygon_node: Polygon2D = $Polygon2D
 var is_broken := false
 
-func apply_cut(swipe_points: PackedVector2Array) -> bool:
+func apply_cut(swipe_points: PackedVector2Array, swipe_dir: Vector2) -> Variant:
 	if is_broken:
-		return false
+		return null
 		
 	var local_points := PackedVector2Array()
 	for pt in swipe_points:
@@ -22,17 +22,23 @@ func apply_cut(swipe_points: PackedVector2Array) -> bool:
 	if sliced_pieces.size() > 0:
 		is_broken = true # Prevent double-cutting in the same frame (reconsider?)
 		
-		var swipe_dir := (swipe_points[swipe_points.size() - 1] - swipe_points[0]).normalized()
+		var largest_rb: RigidBody2D = null
+		var max_area := -1.0
+		
 		for piece_points in sliced_pieces:
-			create_falling_rigidbody(piece_points, swipe_dir)
+			var rb = create_falling_rigidbody(piece_points, swipe_dir)
+			var area = get_polygon_area(piece_points)
+			if area > max_area:
+				max_area = area
+				largest_rb = rb
 		
 		destroyed.emit()
 		queue_free()
-		return true
+		return largest_rb
 	
-	return false
+	return null
 
-func create_falling_rigidbody(points: PackedVector2Array, swipe_dir: Vector2) -> void:
+func create_falling_rigidbody(points: PackedVector2Array, swipe_dir: Vector2) -> RigidBody2D:
 	var scaled_points := PackedVector2Array()
 	for pt in points:
 		# global_scale so it inherits the 3D perspective scale from the Enemy
@@ -82,3 +88,14 @@ func _process(_delta) -> void:
 	
 	# Send it to the Main scene so it doesn't keep charging forward with the surviving Enemy
 	get_tree().current_scene.add_child(rb)
+	
+	
+	return rb
+	
+func get_polygon_area(poly: PackedVector2Array) -> float:
+	var area := 0.0
+	var n := poly.size()
+	for i in range(n):
+		var j := (i + 1) % n
+		area += (poly[i].x * poly[j].y) - (poly[j].x * poly[i].y)
+	return abs(area) / 2.0

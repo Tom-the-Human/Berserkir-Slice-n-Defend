@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dw3ydbmyle5o5"]
+
+[ext_resource type="Script" uid="uid://dyqv6rmqnh0de" path="res://VFX/blood_spray.gd" id="1_v236w"]
+
+[sub_resource type="Curve" id="Curve_h0dmk"]
+_data = [Vector2(0, 1), 0.0, 1.4, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="BloodSpray" type="CPUParticles2D" unique_id=670111423]
+emitting = false
+amount = 50
+lifetime = 3.5
+one_shot = true
+explosiveness = 0.7
+randomness = 0.1
+lifetime_randomness = 0.2
+initial_velocity_min = 800.0
+initial_velocity_max = 1400.0
+scale_amount_min = 8.0
+scale_amount_max = 8.0
+scale_amount_curve = SubResource("Curve_h0dmk")
+color = Color(0.5411765, 0.011764706, 0.011764706, 1)
+script = ExtResource("1_v236w")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

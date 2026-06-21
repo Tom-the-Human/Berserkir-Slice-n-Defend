@@ -5,11 +5,11 @@ extends Node2D
 @onready var main_menu =  %MainMenu
 @onready var pause_screen = %PauseScreen
 @onready var game_over_screen = %GameOverScreen
-
 @onready var upgrade_store = %UpgradeStore
 @onready var glory_wallet_label = %GloryWalletLabel
+@onready var stats_label = %StatsLabel # shown at game over (probably rename)
 
-@onready var stats_label = %StatsLabel # shown at
+@onready var screen_blood = $UIManager/ScreenBlood
 
 var player_health := Global.max_health
 
@@ -60,12 +60,14 @@ func _process_swipe(swipe_points: PackedVector2Array) -> void:
 	var enemies = get_tree().get_nodes_in_group("enemies")
 	enemies.sort_custom(func(a, b): return a.progress > b.progress)
 	
+	var swipe_dir := (swipe_points[-1] - swipe_points[0]).normalized()
+	
 	var current_pierce = Global.pierce
 	# stop checking when pierces run out, and apply cuts 
 	for enemy in enemies:
 		if current_pierce <= 0:
 			break
-		current_pierce = enemy.apply_cut(swipe_points, current_pierce)
+		current_pierce = enemy.apply_cut(swipe_points, current_pierce, swipe_dir)
 
 func _on_player_damaged(damage: int) -> void:
 	if player_health <= 0:
@@ -97,6 +99,18 @@ func _on_part_broken() -> void:
 	run_glory += 1
 	Global.total_glory += 1
 
+func trigger_screen_splatter() -> void:
+	screen_blood.show()
+	
+	# 0.4 is pretty heavy (is it?)
+	screen_blood.material.set_shader_parameter("drip_amount", 1.0)
+	var tween = create_tween()
+	tween.tween_interval(0.5)
+	tween.tween_method(
+		func(val: float): screen_blood.material.set_shader_parameter("drip_amount", val),
+		1.0, 0.0, 2.5
+	)
+	tween.tween_callback(screen_blood.hide)
 
 func _on_play_button_pressed() -> void:
 	for enemy in get_tree().get_nodes_in_group("enemies"):
@@ -107,6 +121,7 @@ func _on_upgrades_button_pressed() -> void:
 	main_menu.hide()
 	game_over_screen.hide()
 	upgrade_store.show()
+	refresh_store_ui()
 
 func _on_settings_button_pressed() -> void:
 	pass # Replace with function body.
@@ -129,10 +144,8 @@ func _on_menu_button_pressed() -> void:
 	hud.hide()
 	main_menu.show()
 
-
 func refresh_store_ui() -> void:
 	glory_wallet_label.text = "Available Glory: " + str(Global.current_glory)
-	
 
 func _on_buy_berserk_trance_button_pressed() -> void:
 	if Global.attempt_purchase(Global.berserk_trance):

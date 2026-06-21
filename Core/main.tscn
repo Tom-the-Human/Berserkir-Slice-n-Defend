@@ -6,6 +6,12 @@
 [ext_resource type="Script" uid="uid://g7lf3ba4rkob" path="res://Core/spawn_director.gd" id="4_avlqc"]
 [ext_resource type="PackedScene" uid="uid://bun0584ros584" path="res://Enemy-sys/peasant.tscn" id="5_okbgg"]
 [ext_resource type="PackedScene" uid="uid://r8b4i7cgbtyu" path="res://Enemy-sys/spearman.tscn" id="6_84tve"]
+[ext_resource type="Shader" uid="uid://dapbwnu5tjnlo" path="res://VFX/screen_blood.gdshader" id="7_okbgg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_84tve"]
+shader = ExtResource("7_okbgg")
+shader_parameter/drip_amount = 0.0
+shader_parameter/blood_color = Color(0.6, 0, 0, 1)
 
 [node name="Main" type="Node2D" unique_id=1991437905]
 y_sort_enabled = true
@@ -208,6 +214,15 @@ text = "Brute Force
 [node name="StoreBackButton" type="Button" parent="UIManager/UpgradeStore/VBoxContainer" unique_id=1047927991]
 layout_mode = 2
 text = "Back"
+
+[node name="ScreenBlood" type="ColorRect" parent="UIManager" unique_id=65117965]
+visible = false
+material = SubResource("ShaderMaterial_84tve")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="pressed" from="UIManager/HUD/MarginContainer/HBoxContainer/PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="UIManager/MainMenu/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]

@@ -12,6 +12,7 @@ var start_pos : Vector2
 var end_pos : Vector2 # Forground/hit zone
 
 @onready var polygon_node: Polygon2D = $Body/Polygon2D
+@export var blood_spray_scene: PackedScene
 
 # hit zone entered outline
 var outline_line: Line2D
@@ -77,7 +78,7 @@ func hit_player() -> void:
 	attacked_player.emit(10)
 	queue_free()
 
-func apply_cut(swipe_points: PackedVector2Array, remaining_pierces: int) -> int:
+func apply_cut(swipe_points: PackedVector2Array, remaining_pierces: int, swipe_dir: Vector2) -> int:
 	if progress < 0.75 or remaining_pierces <= 0:
 		return remaining_pierces
 	
@@ -86,7 +87,7 @@ func apply_cut(swipe_points: PackedVector2Array, remaining_pierces: int) -> int:
 	# check for shield
 	var shield = get_node_or_null("Shield")
 	if remaining_pierces > 0 and shield and not shield.is_broken:
-		var hit_shield = shield.apply_cut(swipe_points)
+		var hit_shield = shield.apply_cut(swipe_points, swipe_dir)
 		if hit_shield:
 			remaining_pierces -= 1
 			parts_hit += 1
@@ -94,7 +95,7 @@ func apply_cut(swipe_points: PackedVector2Array, remaining_pierces: int) -> int:
 	# check for armor
 	var armor = get_node_or_null("Armor")
 	if remaining_pierces > 0 and armor and not armor.is_broken:
-		var hit_armor = armor.apply_cut(swipe_points)
+		var hit_armor = armor.apply_cut(swipe_points, swipe_dir)
 		if hit_armor:
 			remaining_pierces -= 1
 			parts_hit += 1
@@ -102,10 +103,20 @@ func apply_cut(swipe_points: PackedVector2Array, remaining_pierces: int) -> int:
 	# if no protection
 	var body = get_node_or_null("Body")
 	if remaining_pierces > 0 and body and not body.is_broken:
-		var hit_body = body.apply_cut(swipe_points)
-		if hit_body:
+		var hit_body_rb = body.apply_cut(swipe_points, swipe_dir)
+		if hit_body_rb:
 			remaining_pierces -= 1
 			parts_hit += 1
+			if blood_spray_scene:
+				var blood = blood_spray_scene.instantiate()
+				var cut_pos = Geometry2D.get_closest_point_to_segment(body.global_position, swipe_points[0], swipe_points[-1])
+				
+				hit_body_rb.add_child(blood)
+				blood.global_position = cut_pos
+				blood.z_index = z_index + 1
+				#get_tree().current_scene.add_child(blood)
+				blood.spray(swipe_dir, scale.x)
+				get_tree().current_scene.trigger_screen_splatter()
 			die()
 	
 	if parts_hit > 0 and not is_queued_for_deletion():
