@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ldh2b8vnn3oh"
+path="res://.godot/imported/Bare Step Grass Soft D.wav-4c48a99f9d1a80c1d78d2bb18514c721.sample"
+
+[deps]
+
+source_file="res://addons/ovani_auto_footsteps/DefaultSounds/Grass/Bare Step Grass Soft D.wav"
+dest_files=["res://.godot/imported/Bare Step Grass Soft D.wav-4c48a99f9d1a80c1d78d2bb18514c721.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

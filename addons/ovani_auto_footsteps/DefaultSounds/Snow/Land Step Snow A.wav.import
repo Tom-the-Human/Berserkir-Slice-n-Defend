@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dw5h6aqsakw3a"
+path="res://.godot/imported/Land Step Snow A.wav-19f3090c320f8061c402d56cb8921c71.sample"
+
+[deps]
+
+source_file="res://addons/ovani_auto_footsteps/DefaultSounds/Snow/Land Step Snow A.wav"
+dest_files=["res://.godot/imported/Land Step Snow A.wav-19f3090c320f8061c402d56cb8921c71.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

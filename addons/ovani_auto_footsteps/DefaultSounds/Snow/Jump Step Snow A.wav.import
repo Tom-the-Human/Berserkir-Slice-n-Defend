@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dgvykbyjl00lt"
+path="res://.godot/imported/Jump Step Snow A.wav-085799535bf28f4aebf3833428a0e74e.sample"
+
+[deps]
+
+source_file="res://addons/ovani_auto_footsteps/DefaultSounds/Snow/Jump Step Snow A.wav"
+dest_files=["res://.godot/imported/Jump Step Snow A.wav-085799535bf28f4aebf3833428a0e74e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

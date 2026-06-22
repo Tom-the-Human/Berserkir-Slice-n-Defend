@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dqg5uw50hhvo0"
+path="res://.godot/imported/Shoe Step Snow Medium E.wav-0c38fa0eb4f092d1d55b97654c8a222a.sample"
+
+[deps]
+
+source_file="res://addons/ovani_auto_footsteps/DefaultSounds/Snow/Shoe Step Snow Medium E.wav"
+dest_files=["res://.godot/imported/Shoe Step Snow Medium E.wav-0c38fa0eb4f092d1d55b97654c8a222a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

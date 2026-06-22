@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dh34tufc63w57"
+path="res://.godot/imported/Bare Step Snow Medium C.wav-8f4245abe8c1e68d5de81279796baeb4.sample"
+
+[deps]
+
+source_file="res://addons/ovani_auto_footsteps/DefaultSounds/Snow/Bare Step Snow Medium C.wav"
+dest_files=["res://.godot/imported/Bare Step Snow Medium C.wav-8f4245abe8c1e68d5de81279796baeb4.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

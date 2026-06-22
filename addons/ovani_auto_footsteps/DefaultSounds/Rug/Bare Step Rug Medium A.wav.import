@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b7hl1xvm7yjli"
+path="res://.godot/imported/Bare Step Rug Medium A.wav-99696deb491f5240fc67902912096fef.sample"
+
+[deps]
+
+source_file="res://addons/ovani_auto_footsteps/DefaultSounds/Rug/Bare Step Rug Medium A.wav"
+dest_files=["res://.godot/imported/Bare Step Rug Medium A.wav-99696deb491f5240fc67902912096fef.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

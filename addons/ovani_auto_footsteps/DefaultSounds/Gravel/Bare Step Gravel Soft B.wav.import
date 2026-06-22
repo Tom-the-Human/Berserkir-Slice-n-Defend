@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bkfukxor221o8"
+path="res://.godot/imported/Bare Step Gravel Soft B.wav-8c84f2d340813f2ccdcd62245f9e475e.sample"
+
+[deps]
+
+source_file="res://addons/ovani_auto_footsteps/DefaultSounds/Gravel/Bare Step Gravel Soft B.wav"
+dest_files=["res://.godot/imported/Bare Step Gravel Soft B.wav-8c84f2d340813f2ccdcd62245f9e475e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -14,6 +14,7 @@ var end_pos : Vector2 # Forground/hit zone
 @onready var polygon_node: Polygon2D = $Body/Polygon2D
 @export var blood_spray_scene: PackedScene
 @export var wood_spray_scene: PackedScene
+@export var armor_break_sfx: PackedScene
 
 # hit zone entered outline
 var outline_line: Line2D
@@ -108,6 +109,10 @@ func apply_cut(swipe_points: PackedVector2Array, remaining_pierces: int, swipe_d
 		if hit_armor:
 			remaining_pierces -= 1
 			parts_hit += 1
+			if armor_break_sfx:
+				var audio = armor_break_sfx.instantiate()
+				get_tree().current_scene.add_child(audio)
+				audio.play()
 	
 	# if no protection
 	var body = get_node_or_null("Body")

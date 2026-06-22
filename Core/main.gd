@@ -1,5 +1,8 @@
 extends Node2D
 
+@onready var music_player = $MusicPlayer
+@export var music: OvaniSong
+
 @onready var ui_manager = $UIManager
 @onready var hud = %HUD
 @onready var main_menu =  %MainMenu
@@ -28,6 +31,14 @@ func _ready() -> void:
 	$SpawnDirector.enemy_spawned.connect(_on_enemy_spawned)
 	get_tree().paused = true
 	
+	
+	# fade in to 0.0 (normal) over a few secs on load
+	if music:
+		music_player.QueueSong(music)
+	music_player.Intensity = 0.0
+	music_player.Volume = -40.0
+	music_player.FadeVolume(0.0, 3.0)
+	
 	hud.hide()
 	pause_screen.hide()
 	game_over_screen.hide()
@@ -46,12 +57,14 @@ func _process(delta: float) -> void:
 
 
 func start_new_run() -> void:
-	# DEBUG
-	print("Run started")
 	run_glory = 0
 	run_kills = 0
 	run_start_time = Time.get_ticks_msec()
 	player_health = Global.max_health
+	
+	music_player.Intensity = 0.25 # intensity 2 = 0.5
+	music_player.FadeIntensity(1.0, 90.0)
+	
 	
 	main_menu.hide()
 	game_over_screen.hide()
@@ -70,6 +83,7 @@ func _on_enemy_spawned(new_enemy: Enemy) -> void:
 	new_enemy.part_broken.connect(_on_part_broken)
 
 func _process_swipe(swipe_points: PackedVector2Array) -> void:
+	$AttackSFX.play()
 	var enemies = get_tree().get_nodes_in_group("enemies")
 	enemies.sort_custom(func(a, b): return a.progress > b.progress)
 	
@@ -83,7 +97,14 @@ func _process_swipe(swipe_points: PackedVector2Array) -> void:
 		current_pierce = enemy.apply_cut(swipe_points, current_pierce, swipe_dir)
 
 func _on_player_damaged(damage: int) -> void:
+	$TakeDamageSFX.play()
+	player_health -= damage
+	trigger_player_hit_vfx()
+	# debug/placeholder
+	print("Hit! Player health now ", player_health)
+	
 	if player_health <= 0:
+		music_player.FadeIntensity(0.1, 3.0)
 		# get run time
 		var run_end_time := Time.get_ticks_msec()
 		var elapsed_msec := run_end_time - run_start_time
@@ -99,11 +120,6 @@ func _on_player_damaged(damage: int) -> void:
 		
 		hud.hide()
 		game_over_screen.show()
-	
-	player_health -= damage
-	trigger_player_hit_vfx()
-	# debug/placeholder
-	print("Hit! Player health now ", player_health)
 
 func trigger_player_hit_vfx() -> void:
 	var health_ratio: float = float(player_health) / float(Global.max_health)

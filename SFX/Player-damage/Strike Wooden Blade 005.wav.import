@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c3mdjebjavx5e"
+path="res://.godot/imported/Strike Wooden Blade 005.wav-68c291fe85648d26fe45715477d241ca.sample"
+
+[deps]
+
+source_file="res://SFX/Player-damage/Strike Wooden Blade 005.wav"
+dest_files=["res://.godot/imported/Strike Wooden Blade 005.wav-68c291fe85648d26fe45715477d241ca.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

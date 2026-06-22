@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://23pr3rg4losj"
+path="res://.godot/imported/Nordic Thor's Wrath Cut 60.wav-439724df6692a0661aa4baae2e33c3bf.sample"
+
+[deps]
+
+source_file="res://Music/Thor's Wrath (RT 1.875)/Nordic Thor's Wrath Cut 60.wav"
+dest_files=["res://.godot/imported/Nordic Thor's Wrath Cut 60.wav-439724df6692a0661aa4baae2e33c3bf.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

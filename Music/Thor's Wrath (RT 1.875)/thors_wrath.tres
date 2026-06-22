@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="OvaniSong" format=3 uid="uid://bcxlt82rk1sfi"]
+
+[ext_resource type="AudioStream" uid="uid://bvx46tv8tulrx" path="res://Music/Thor's Wrath (RT 1.875)/Nordic Thor's Wrath Intensity 1.wav" id="1_2r36e"]
+[ext_resource type="Script" uid="uid://cr3j7ftlw6eda" path="res://OvaniPlugin/OvaniSong.gd" id="1_7ugb5"]
+[ext_resource type="AudioStream" uid="uid://un8jdaodqfql" path="res://Music/Thor's Wrath (RT 1.875)/Nordic Thor's Wrath Intensity 2.wav" id="2_40778"]
+[ext_resource type="AudioStream" uid="uid://c84caqhwke7e" path="res://Music/Thor's Wrath (RT 1.875)/Nordic Thor's Wrath Main.wav" id="3_0ko4n"]
+[ext_resource type="AudioStream" uid="uid://drf3n8mnkmqep" path="res://Music/Thor's Wrath (RT 1.875)/Nordic Thor's Wrath Cut 30.wav" id="4_67d7u"]
+[ext_resource type="AudioStream" uid="uid://23pr3rg4losj" path="res://Music/Thor's Wrath (RT 1.875)/Nordic Thor's Wrath Cut 60.wav" id="5_wn2e8"]
+
+[resource]
+script = ExtResource("1_7ugb5")
+Intensity1 = ExtResource("1_2r36e")
+Intensity2 = ExtResource("2_40778")
+Intensity3 = ExtResource("3_0ko4n")
+Loop30 = ExtResource("4_67d7u")
+Loop60 = ExtResource("5_wn2e8")
+ReverbTail = 1.875
+metadata/_custom_type_script = "uid://cr3j7ftlw6eda"

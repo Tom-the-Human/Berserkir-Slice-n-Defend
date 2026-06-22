@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cmvyn0kjugcuj"
+path="res://.godot/imported/Strike Blade Large 002.wav-b2c2b4b83a47f8ab0408c7c2e7e7e7f1.sample"
+
+[deps]
+
+source_file="res://SFX/Axe-strike/Strike Blade Large 002.wav"
+dest_files=["res://.godot/imported/Strike Blade Large 002.wav-b2c2b4b83a47f8ab0408c7c2e7e7e7f1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

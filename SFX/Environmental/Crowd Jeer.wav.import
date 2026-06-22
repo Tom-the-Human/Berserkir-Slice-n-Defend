@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bf0qrvbmmtvrc"
+path="res://.godot/imported/Crowd Jeer.wav-9f9409197da3bc3c6edf27da619d0610.sample"
+
+[deps]
+
+source_file="res://SFX/Environmental/Crowd Jeer.wav"
+dest_files=["res://.godot/imported/Crowd Jeer.wav-9f9409197da3bc3c6edf27da619d0610.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

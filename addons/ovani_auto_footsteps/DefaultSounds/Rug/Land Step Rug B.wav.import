@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cnc7aqpl74eb3"
+path="res://.godot/imported/Land Step Rug B.wav-564e5c3015f0afc28f592dbf05d8cc1b.sample"
+
+[deps]
+
+source_file="res://addons/ovani_auto_footsteps/DefaultSounds/Rug/Land Step Rug B.wav"
+dest_files=["res://.godot/imported/Land Step Rug B.wav-564e5c3015f0afc28f592dbf05d8cc1b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

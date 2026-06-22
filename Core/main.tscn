@@ -8,6 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://r8b4i7cgbtyu" path="res://Enemy-sys/spearman.tscn" id="6_84tve"]
 [ext_resource type="Shader" uid="uid://dapbwnu5tjnlo" path="res://VFX/screen_blood.gdshader" id="7_okbgg"]
 [ext_resource type="Shader" uid="uid://be3wbsm1760l" path="res://VFX/damage_flash.gdshader" id="8_84tve"]
+[ext_resource type="Script" uid="uid://cq5sreblq5rnd" path="res://OvaniPlugin/OvaniPlayer.gd" id="9_ua6uo"]
+[ext_resource type="Script" uid="uid://cr3j7ftlw6eda" path="res://OvaniPlugin/OvaniSong.gd" id="10_4ewli"]
+[ext_resource type="Resource" uid="uid://bcxlt82rk1sfi" path="res://Music/Thor's Wrath (RT 1.875)/thors_wrath.tres" id="11_27hw8"]
+[ext_resource type="AudioStream" uid="uid://cg5a7g7orgaku" path="res://SFX/Player-damage/Strike Blade Medium 001.wav" id="12_7ygvr"]
+[ext_resource type="AudioStream" uid="uid://ffvb6a7smh6w" path="res://SFX/Player-damage/Strike Blade Medium 002.wav" id="13_mprhp"]
+[ext_resource type="AudioStream" uid="uid://dt0b5x6wxfu6q" path="res://SFX/Player-damage/Strike Blade Medium 003.wav" id="14_tl35v"]
+[ext_resource type="AudioStream" uid="uid://dk3nrrqfkieyg" path="res://SFX/Player-damage/Strike Blade Medium 004.wav" id="15_e2c72"]
+[ext_resource type="AudioStream" uid="uid://c05x5588widyi" path="res://SFX/Player-damage/Strike Blade Medium 005.wav" id="16_srhnv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_84tve"]
 shader = ExtResource("7_okbgg")
@@ -23,9 +31,20 @@ shader_parameter/color1 = Color(1, 0, 0, 1)
 shader_parameter/color2 = Color(1, 1, 1, 1)
 shader_parameter/flash_speed = 30.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3t67a"]
+random_pitch = 1.1574234
+random_volume_offset_db = 1.09
+streams_count = 5
+stream_0/stream = ExtResource("12_7ygvr")
+stream_1/stream = ExtResource("13_mprhp")
+stream_2/stream = ExtResource("14_tl35v")
+stream_3/stream = ExtResource("15_e2c72")
+stream_4/stream = ExtResource("16_srhnv")
+
 [node name="Main" type="Node2D" unique_id=1991437905]
 y_sort_enabled = true
 script = ExtResource("1_cj3ed")
+music = ExtResource("11_27hw8")
 
 [node name="SwipeTrail" type="Line2D" parent="." unique_id=45593343]
 z_index = 150
@@ -252,6 +271,18 @@ text = "Back"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=923471005]
 anchor_mode = 0
+
+[node name="MusicPlayer" type="Node" parent="." unique_id=397171364]
+process_mode = 3
+script = ExtResource("9_ua6uo")
+QueuedSongs = Array[ExtResource("10_4ewli")]([ExtResource("11_27hw8")])
+Volume = -0.5259999999999962
+
+[node name="AttackSFX" type="AudioStreamPlayer2D" parent="." unique_id=1118604640]
+stream = SubResource("AudioStreamRandomizer_3t67a")
+
+[node name="TakeDamageSFX" type="AudioStreamPlayer2D" parent="." unique_id=1493419207]
+stream = SubResource("AudioStreamRandomizer_3t67a")
 
 [connection signal="pressed" from="UIManager/HUD/MarginContainer/HBoxContainer/PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="UIManager/MainMenu/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]

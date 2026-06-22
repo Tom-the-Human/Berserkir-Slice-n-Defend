@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ffvb6a7smh6w"
+path="res://.godot/imported/Strike Blade Medium 002.wav-18cdc26ba47d32992af72379449e1dba.sample"
+
+[deps]
+
+source_file="res://SFX/Player-damage/Strike Blade Medium 002.wav"
+dest_files=["res://.godot/imported/Strike Blade Medium 002.wav-18cdc26ba47d32992af72379449e1dba.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

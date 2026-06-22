@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cb0iu8iec6hnm"
+path="res://.godot/imported/Shoe Step Grass Hard A.wav-f4df16077a34a8f687b582f506109687.sample"
+
+[deps]
+
+source_file="res://addons/ovani_auto_footsteps/DefaultSounds/Grass/Shoe Step Grass Hard A.wav"
+dest_files=["res://.godot/imported/Shoe Step Grass Hard A.wav-f4df16077a34a8f687b582f506109687.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

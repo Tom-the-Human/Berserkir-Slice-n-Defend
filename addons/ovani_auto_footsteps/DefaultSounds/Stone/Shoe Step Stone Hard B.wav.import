@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bnqflu5xcfmpl"
+path="res://.godot/imported/Shoe Step Stone Hard B.wav-1e1ac7da47a75353aba2ec881a1d78d6.sample"
+
+[deps]
+
+source_file="res://addons/ovani_auto_footsteps/DefaultSounds/Stone/Shoe Step Stone Hard B.wav"
+dest_files=["res://.godot/imported/Shoe Step Stone Hard B.wav-1e1ac7da47a75353aba2ec881a1d78d6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

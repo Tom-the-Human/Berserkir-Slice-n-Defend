@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cpbmks0fuj6hq"
+path="res://.godot/imported/Jump Step Gravel B.wav-5f63a34c484d4aa8d39cec8b00224855.sample"
+
+[deps]
+
+source_file="res://addons/ovani_auto_footsteps/DefaultSounds/Gravel/Jump Step Gravel B.wav"
+dest_files=["res://.godot/imported/Jump Step Gravel B.wav-5f63a34c484d4aa8d39cec8b00224855.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

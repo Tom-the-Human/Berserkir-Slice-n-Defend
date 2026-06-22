@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://31appbfotghh"
+path="res://.godot/imported/Bare Step Metal Hard E.wav-74a17b1daae30d73c05b09df7239413d.sample"
+
+[deps]
+
+source_file="res://addons/ovani_auto_footsteps/DefaultSounds/Metal/Bare Step Metal Hard E.wav"
+dest_files=["res://.godot/imported/Bare Step Metal Hard E.wav-74a17b1daae30d73c05b09df7239413d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

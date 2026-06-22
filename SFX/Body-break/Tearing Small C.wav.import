@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://csbxtaleplpsi"
+path="res://.godot/imported/Tearing Small C.wav-af4608c10c3a60a334d16fc4e0d53660.sample"
+
+[deps]
+
+source_file="res://SFX/Body-break/Tearing Small C.wav"
+dest_files=["res://.godot/imported/Tearing Small C.wav-af4608c10c3a60a334d16fc4e0d53660.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

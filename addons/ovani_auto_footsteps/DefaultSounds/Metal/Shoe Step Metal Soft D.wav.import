@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dv465voact2tv"
+path="res://.godot/imported/Shoe Step Metal Soft D.wav-fb71ba949e5f675dc59424a0e647f594.sample"
+
+[deps]
+
+source_file="res://addons/ovani_auto_footsteps/DefaultSounds/Metal/Shoe Step Metal Soft D.wav"
+dest_files=["res://.godot/imported/Shoe Step Metal Soft D.wav-fb71ba949e5f675dc59424a0e647f594.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b4vcorvhxc5a7"
+path="res://.godot/imported/Scuff Step Gravel A.wav-eb9f4506732d1bb3d18cacc1a060382a.sample"
+
+[deps]
+
+source_file="res://addons/ovani_auto_footsteps/DefaultSounds/Gravel/Scuff Step Gravel A.wav"
+dest_files=["res://.godot/imported/Scuff Step Gravel A.wav-eb9f4506732d1bb3d18cacc1a060382a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

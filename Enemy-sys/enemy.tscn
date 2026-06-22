@@ -4,11 +4,13 @@
 [ext_resource type="Script" uid="uid://rs36gbbcnll6" path="res://Enemy-sys/sliceable_part.gd" id="2_qhfmm"]
 [ext_resource type="PackedScene" uid="uid://cr7auwplc84t6" path="res://VFX/wood_spray.tscn" id="3_ao7r4"]
 [ext_resource type="PackedScene" uid="uid://dw3ydbmyle5o5" path="res://VFX/blood_spray.tscn" id="3_m1veg"]
+[ext_resource type="PackedScene" uid="uid://bw283002r6e5g" path="res://Enemy-sys/armor_break_sfx.tscn" id="4_ypb5d"]
 
 [node name="Enemy" type="Area2D" unique_id=1703952146 groups=["enemies"]]
 script = ExtResource("1_h4rym")
 blood_spray_scene = ExtResource("3_m1veg")
 wood_spray_scene = ExtResource("3_ao7r4")
+armor_break_sfx = ExtResource("4_ypb5d")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=2022778578]
 polygon = PackedVector2Array(-32, -64, 32, -64, 32, 64, -32, 64)

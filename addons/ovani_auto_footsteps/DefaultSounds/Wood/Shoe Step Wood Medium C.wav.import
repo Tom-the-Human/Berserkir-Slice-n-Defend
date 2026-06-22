@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b2o1gas5lbnxs"
+path="res://.godot/imported/Shoe Step Wood Medium C.wav-869283b8f356758a8d6a5215c3d98e9d.sample"
+
+[deps]
+
+source_file="res://addons/ovani_auto_footsteps/DefaultSounds/Wood/Shoe Step Wood Medium C.wav"
+dest_files=["res://.godot/imported/Shoe Step Wood Medium C.wav-869283b8f356758a8d6a5215c3d98e9d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
