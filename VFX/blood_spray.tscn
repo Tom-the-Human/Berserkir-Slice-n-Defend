@@ -1,11 +1,6 @@
 [gd_scene format=3 uid="uid://dw3ydbmyle5o5"]
 
 [ext_resource type="Script" uid="uid://dyqv6rmqnh0de" path="res://VFX/blood_spray.gd" id="1_v236w"]
-[ext_resource type="AudioStream" uid="uid://dc3hhh2dfp8no" path="res://SFX/Body-break/Chop Large A.wav" id="2_tl071"]
-[ext_resource type="AudioStream" uid="uid://mdyl0sehucrd" path="res://SFX/Body-break/Chop Large B.wav" id="3_n72s2"]
-[ext_resource type="AudioStream" uid="uid://c7i4udegopfpd" path="res://SFX/Body-break/Chop Large C.wav" id="4_f1gi3"]
-[ext_resource type="AudioStream" uid="uid://daqdcfiaw1py6" path="res://SFX/Body-break/Chop Large D.wav" id="5_blinq"]
-[ext_resource type="AudioStream" uid="uid://bdxjy0unugppn" path="res://SFX/Body-break/Chop Large E.wav" id="6_mn7s3"]
 
 [sub_resource type="Curve" id="Curve_h0dmk"]
 _data = [Vector2(0, 1), 0.0, 1.4, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -15,17 +10,6 @@ point_count = 2
 _limits = [-1.0, 1.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.3299595, -0.7024981), 0.0, 0.0, 0, 0, Vector2(0.6295547, 0.72445124), 0.0, 0.0, 0, 0, Vector2(0.99797577, -0.9780468), 0.0, 0.0, 0, 0]
 point_count = 4
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_u2xsr"]
-playback_mode = 1
-random_pitch = 1.1387886
-random_volume_offset_db = 2.5
-streams_count = 5
-stream_0/stream = ExtResource("2_tl071")
-stream_1/stream = ExtResource("3_n72s2")
-stream_2/stream = ExtResource("4_f1gi3")
-stream_3/stream = ExtResource("5_blinq")
-stream_4/stream = ExtResource("6_mn7s3")
 
 [node name="BloodSpray" type="CPUParticles2D" unique_id=670111423]
 emitting = false
@@ -45,9 +29,5 @@ hue_variation_min = -0.02
 hue_variation_max = 0.02
 hue_variation_curve = SubResource("Curve_tl071")
 script = ExtResource("1_v236w")
-
-[node name="BreakSFX" type="AudioStreamPlayer2D" parent="." unique_id=276469401]
-stream = SubResource("AudioStreamRandomizer_u2xsr")
-bus = &"SFX"
 
 [connection signal="finished" from="." to="." method="_on_finished"]

@@ -27,6 +27,7 @@ var run_time_str := ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$SwipeTrail.swipe_started.connect(_on_swipe_started)
 	$SwipeTrail.swipe_completed.connect(_process_swipe)
 	$SpawnDirector.enemy_spawned.connect(_on_enemy_spawned)
 	get_tree().paused = true
@@ -81,9 +82,13 @@ func _on_enemy_spawned(new_enemy: Enemy) -> void:
 	# listen for stat signals
 	new_enemy.killed.connect(_on_enemy_killed)
 	new_enemy.part_broken.connect(_on_part_broken)
+	
+func _on_swipe_started() -> void:
+	# mostly just for playing the axe swing sound effect
+	$CombatAudio/AttackSFX.play()
+	
 
 func _process_swipe(swipe_points: PackedVector2Array) -> void:
-	$AttackSFX.play()
 	var enemies = get_tree().get_nodes_in_group("enemies")
 	enemies.sort_custom(func(a, b): return a.progress > b.progress)
 	
@@ -97,7 +102,7 @@ func _process_swipe(swipe_points: PackedVector2Array) -> void:
 		current_pierce = enemy.apply_cut(swipe_points, current_pierce, swipe_dir)
 
 func _on_player_damaged(damage: int) -> void:
-	$TakeDamageSFX.play()
+	$CombatAudio/TakeDamageSFX.play()
 	player_health -= damage
 	trigger_player_hit_vfx()
 	# debug/placeholder

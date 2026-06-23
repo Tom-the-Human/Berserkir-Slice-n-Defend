@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://j68uuv8g3gr1"]
+
+[ext_resource type="AudioStream" uid="uid://cdue8d5kbmmuo" path="res://SFX/Shield-break/Material Layer Wood A.wav" id="1_008rb"]
+[ext_resource type="AudioStream" uid="uid://d4cvy1vmc7gb4" path="res://SFX/Shield-break/Plank Drop A.wav" id="2_vsgjv"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5d8ye"]
+resource_local_to_scene = true
+random_pitch = 1.4094021
+random_volume_offset_db = 4.28
+streams_count = 2
+stream_0/stream = ExtResource("1_008rb")
+stream_1/stream = ExtResource("2_vsgjv")
+
+[node name="ShieldBreakSFX" type="AudioStreamPlayer" unique_id=86988750]
+stream = SubResource("AudioStreamRandomizer_5d8ye")
+bus = &"SFX"

@@ -2,7 +2,6 @@ extends CPUParticles2D
 
 
 func spray(swipe_dir: Vector2, enemy_scale: float) -> void:
-	$BreakSFX.play()
 	# scale and velocity
 	scale_amount_min = 2.0 * enemy_scale
 	scale_amount_max = 6.0 * enemy_scale

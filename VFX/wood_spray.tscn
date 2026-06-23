@@ -1,16 +1,6 @@
 [gd_scene format=3 uid="uid://cr7auwplc84t6"]
 
 [ext_resource type="Script" uid="uid://hvrd4otk1aj2" path="res://VFX/wood_spray.gd" id="1_bbiug"]
-[ext_resource type="AudioStream" uid="uid://cdue8d5kbmmuo" path="res://SFX/Shield-break/Material Layer Wood A.wav" id="2_cahpq"]
-[ext_resource type="AudioStream" uid="uid://d4cvy1vmc7gb4" path="res://SFX/Shield-break/Plank Drop A.wav" id="3_0oci5"]
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5d8ye"]
-resource_local_to_scene = true
-random_pitch = 1.1916138
-random_volume_offset_db = 4.28
-streams_count = 2
-stream_0/stream = ExtResource("2_cahpq")
-stream_1/stream = ExtResource("3_0oci5")
 
 [node name="WoodSpray" type="CPUParticles2D" unique_id=351144879]
 emitting = false
@@ -21,7 +11,3 @@ angle_min = -720.0
 angle_max = 720.0
 color = Color(0.54509807, 0.3529412, 0.16862746, 1)
 script = ExtResource("1_bbiug")
-
-[node name="BreakSFX" type="AudioStreamPlayer2D" parent="." unique_id=457781773]
-stream = SubResource("AudioStreamRandomizer_5d8ye")
-bus = &"SFX"

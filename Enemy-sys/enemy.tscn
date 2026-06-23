@@ -4,12 +4,16 @@
 [ext_resource type="Script" uid="uid://rs36gbbcnll6" path="res://Enemy-sys/sliceable_part.gd" id="2_qhfmm"]
 [ext_resource type="PackedScene" uid="uid://cr7auwplc84t6" path="res://VFX/wood_spray.tscn" id="3_ao7r4"]
 [ext_resource type="PackedScene" uid="uid://dw3ydbmyle5o5" path="res://VFX/blood_spray.tscn" id="3_m1veg"]
-[ext_resource type="PackedScene" uid="uid://bw283002r6e5g" path="res://Enemy-sys/armor_break_sfx.tscn" id="4_ypb5d"]
+[ext_resource type="PackedScene" uid="uid://bw283002r6e5g" path="res://SFX/armor_break_sfx.tscn" id="4_ypb5d"]
+[ext_resource type="PackedScene" uid="uid://c3s5ync2t1urn" path="res://SFX/body_break_sfx.tscn" id="4_ywmbl"]
+[ext_resource type="PackedScene" uid="uid://j68uuv8g3gr1" path="res://SFX/shield_break_sfx.tscn" id="5_vjbhk"]
 
 [node name="Enemy" type="Area2D" unique_id=1703952146 groups=["enemies"]]
 script = ExtResource("1_h4rym")
 blood_spray_scene = ExtResource("3_m1veg")
 wood_spray_scene = ExtResource("3_ao7r4")
+body_break_sfx = ExtResource("4_ywmbl")
+shield_break_sfx = ExtResource("5_vjbhk")
 armor_break_sfx = ExtResource("4_ypb5d")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=2022778578]

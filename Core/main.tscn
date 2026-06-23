@@ -16,6 +16,8 @@
 [ext_resource type="AudioStream" uid="uid://dt0b5x6wxfu6q" path="res://SFX/Player-damage/Strike Blade Medium 003.wav" id="14_tl35v"]
 [ext_resource type="AudioStream" uid="uid://dk3nrrqfkieyg" path="res://SFX/Player-damage/Strike Blade Medium 004.wav" id="15_e2c72"]
 [ext_resource type="AudioStream" uid="uid://c05x5588widyi" path="res://SFX/Player-damage/Strike Blade Medium 005.wav" id="16_srhnv"]
+[ext_resource type="AudioStream" uid="uid://38d4tcvjg2ci" path="res://SFX/Environmental/River Close A.wav" id="17_mprhp"]
+[ext_resource type="AudioStream" uid="uid://csnnv3fgmkfq4" path="res://SFX/Environmental/Dry Crowd Outdoor.wav" id="18_tl35v"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_84tve"]
 shader = ExtResource("7_okbgg")
@@ -32,8 +34,8 @@ shader_parameter/color2 = Color(1, 1, 1, 1)
 shader_parameter/flash_speed = 30.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3t67a"]
-random_pitch = 1.1574234
-random_volume_offset_db = 1.09
+random_pitch = 1.2968395
+random_volume_offset_db = 2.65
 streams_count = 5
 stream_0/stream = ExtResource("12_7ygvr")
 stream_1/stream = ExtResource("13_mprhp")
@@ -278,11 +280,30 @@ script = ExtResource("9_ua6uo")
 QueuedSongs = Array[ExtResource("10_4ewli")]([ExtResource("11_27hw8")])
 Volume = -0.5259999999999962
 
-[node name="AttackSFX" type="AudioStreamPlayer2D" parent="." unique_id=1118604640]
-stream = SubResource("AudioStreamRandomizer_3t67a")
+[node name="CombatAudio" type="Node2D" parent="." unique_id=571439607]
 
-[node name="TakeDamageSFX" type="AudioStreamPlayer2D" parent="." unique_id=1493419207]
+[node name="AttackSFX" type="AudioStreamPlayer2D" parent="CombatAudio" unique_id=1118604640]
 stream = SubResource("AudioStreamRandomizer_3t67a")
+bus = &"SFX"
+
+[node name="TakeDamageSFX" type="AudioStreamPlayer2D" parent="CombatAudio" unique_id=1493419207]
+stream = SubResource("AudioStreamRandomizer_3t67a")
+bus = &"SFX"
+
+[node name="EnvironmentalAudio" type="Node2D" parent="." unique_id=378251193]
+
+[node name="RiverSFX" type="AudioStreamPlayer" parent="EnvironmentalAudio" unique_id=472908195]
+process_mode = 3
+stream = ExtResource("17_mprhp")
+volume_db = -20.644
+autoplay = true
+bus = &"Ambiance"
+
+[node name="ArmyBackgroundSFX" type="AudioStreamPlayer" parent="EnvironmentalAudio" unique_id=1002028139]
+stream = ExtResource("18_tl35v")
+volume_db = -8.959
+pitch_scale = 0.96
+autoplay = true
 
 [connection signal="pressed" from="UIManager/HUD/MarginContainer/HBoxContainer/PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="UIManager/MainMenu/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]

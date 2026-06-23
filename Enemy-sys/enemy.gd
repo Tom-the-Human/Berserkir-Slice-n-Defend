@@ -14,6 +14,8 @@ var end_pos : Vector2 # Forground/hit zone
 @onready var polygon_node: Polygon2D = $Body/Polygon2D
 @export var blood_spray_scene: PackedScene
 @export var wood_spray_scene: PackedScene
+@export var body_break_sfx: PackedScene
+@export var shield_break_sfx: PackedScene
 @export var armor_break_sfx: PackedScene
 
 # hit zone entered outline
@@ -79,7 +81,7 @@ func _process(delta: float) -> void:
 func hit_player() -> void:
 	attacked_player.emit(10)
 	queue_free()
-
+	
 func apply_cut(swipe_points: PackedVector2Array, remaining_pierces: int, swipe_dir: Vector2) -> int:
 	if progress < 0.75 or remaining_pierces <= 0:
 		return remaining_pierces
@@ -89,6 +91,10 @@ func apply_cut(swipe_points: PackedVector2Array, remaining_pierces: int, swipe_d
 	# check for shield
 	var shield = get_node_or_null("Shield")
 	if remaining_pierces > 0 and shield and not shield.is_broken:
+		if shield_break_sfx:
+			var audio = shield_break_sfx.instantiate()
+			get_tree().current_scene.add_child(audio)
+			audio.play()
 		var hit_shield_rb = shield.apply_cut(swipe_points, swipe_dir)
 		if hit_shield_rb:
 			remaining_pierces -= 1
@@ -105,18 +111,23 @@ func apply_cut(swipe_points: PackedVector2Array, remaining_pierces: int, swipe_d
 	# check for armor
 	var armor = get_node_or_null("Armor")
 	if remaining_pierces > 0 and armor and not armor.is_broken:
+		if armor_break_sfx:
+			var audio = armor_break_sfx.instantiate()
+			get_tree().current_scene.add_child(audio)
+			audio.play()
 		var hit_armor = armor.apply_cut(swipe_points, swipe_dir)
 		if hit_armor:
 			remaining_pierces -= 1
 			parts_hit += 1
-			if armor_break_sfx:
-				var audio = armor_break_sfx.instantiate()
-				get_tree().current_scene.add_child(audio)
-				audio.play()
+	
 	
 	# if no protection
 	var body = get_node_or_null("Body")
 	if remaining_pierces > 0 and body and not body.is_broken:
+		if body_break_sfx:
+			var audio = body_break_sfx.instantiate()
+			get_tree().current_scene.add_child(audio)
+			audio.play()
 		var hit_body_rb = body.apply_cut(swipe_points, swipe_dir)
 		if hit_body_rb:
 			remaining_pierces -= 1
@@ -128,7 +139,6 @@ func apply_cut(swipe_points: PackedVector2Array, remaining_pierces: int, swipe_d
 				hit_body_rb.add_child(blood)
 				blood.global_position = cut_pos
 				blood.z_index = z_index + 1
-				#get_tree().current_scene.add_child(blood)
 				blood.spray(swipe_dir, scale.x)
 				get_tree().current_scene.trigger_screen_splatter()
 			die()
