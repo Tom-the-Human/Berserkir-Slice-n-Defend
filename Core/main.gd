@@ -16,6 +16,7 @@ extends Node2D
 @onready var damage_flash = $UIManager/DamageFlash
 @onready var camera = $Camera2D
 var current_shake_strength := 0.0
+var is_in_hit_stop := false
 
 var player_health := Global.max_health
 
@@ -89,17 +90,50 @@ func _on_swipe_started() -> void:
 	
 
 func _process_swipe(swipe_points: PackedVector2Array) -> void:
+	# ignore taps or invalid lines
+	if swipe_points.size() < 2:
+		return
+		
 	var enemies = get_tree().get_nodes_in_group("enemies")
 	enemies.sort_custom(func(a, b): return a.progress > b.progress)
 	
 	var swipe_dir := (swipe_points[-1] - swipe_points[0]).normalized()
 	
-	var current_pierce = Global.pierce
+	var starting_pierce = Global.pierce
+	var current_pierce = starting_pierce
 	# stop checking when pierces run out, and apply cuts 
 	for enemy in enemies:
 		if current_pierce <= 0:
 			break
 		current_pierce = enemy.apply_cut(swipe_points, current_pierce, swipe_dir)
+	
+	# definitely hit something
+	if current_pierce < starting_pierce:
+		trigger_hit_stop()
+		
+
+func trigger_hit_stop() -> void:
+	if is_in_hit_stop:
+		return
+	is_in_hit_stop = true
+	
+	# localized transparent white flash
+	var flash = ColorRect.new()
+	flash.color = Color(1.0, 1.0, 1.0, 0.3)
+	flash.set_anchors_preset(Control.PRESET_FULL_RECT)
+	ui_manager.add_child(flash)
+	
+	# freeze frame
+	get_tree().paused = true
+	# wait 50ms, `true` keeps timer ticking during pause
+	await get_tree().create_timer(0.12, true).timeout
+	# unfreeze, del flash
+	get_tree().paused = false
+	flash.queue_free()
+	is_in_hit_stop = false
+	
+	# camera shake
+	current_shake_strength = 20
 
 func _on_player_damaged(damage: int) -> void:
 	$CombatAudio/TakeDamageSFX.play()

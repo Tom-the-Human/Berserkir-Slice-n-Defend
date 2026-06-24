@@ -18,5 +18,6 @@ stream_3/stream = ExtResource("4_qedi2")
 stream_4/stream = ExtResource("5_munmu")
 
 [node name="BodyBreakSFX" type="AudioStreamPlayer" unique_id=711869281]
+process_mode = 3
 stream = SubResource("AudioStreamRandomizer_u2xsr")
 bus = &"SFX"

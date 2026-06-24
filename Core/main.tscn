@@ -283,10 +283,12 @@ Volume = -0.5259999999999962
 [node name="CombatAudio" type="Node2D" parent="." unique_id=571439607]
 
 [node name="AttackSFX" type="AudioStreamPlayer2D" parent="CombatAudio" unique_id=1118604640]
+process_mode = 3
 stream = SubResource("AudioStreamRandomizer_3t67a")
 bus = &"SFX"
 
 [node name="TakeDamageSFX" type="AudioStreamPlayer2D" parent="CombatAudio" unique_id=1493419207]
+process_mode = 3
 stream = SubResource("AudioStreamRandomizer_3t67a")
 bus = &"SFX"
 

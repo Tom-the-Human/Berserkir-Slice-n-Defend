@@ -12,5 +12,6 @@ stream_0/stream = ExtResource("1_008rb")
 stream_1/stream = ExtResource("2_vsgjv")
 
 [node name="ShieldBreakSFX" type="AudioStreamPlayer" unique_id=86988750]
+process_mode = 3
 stream = SubResource("AudioStreamRandomizer_5d8ye")
 bus = &"SFX"

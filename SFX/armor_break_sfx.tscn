@@ -1,21 +1,22 @@
 [gd_scene format=3 uid="uid://bw283002r6e5g"]
 
-[ext_resource type="AudioStream" uid="uid://clcb51bh0usya" path="res://SFX/Armor-break/Material Layer Metal D.wav" id="1_53i8i"]
-[ext_resource type="AudioStream" uid="uid://swy2dfdchmjm" path="res://SFX/Armor-break/Metal Impact Medium A.wav" id="2_raj8y"]
-[ext_resource type="AudioStream" uid="uid://c6eubyidqqb1a" path="res://SFX/Armor-break/Metal Impact Medium B.wav" id="3_qrwvb"]
-[ext_resource type="AudioStream" uid="uid://ca0lsqhjko001" path="res://SFX/Armor-break/Metal Impact Medium C.wav" id="4_cgol1"]
-[ext_resource type="AudioStream" uid="uid://b6jyjk4reo5t6" path="res://SFX/Armor-break/Metal Impact Medium D.wav" id="5_064dj"]
+[ext_resource type="AudioStream" uid="uid://clcb51bh0usya" path="res://SFX/Armor-break/Material Layer Metal D.wav" id="1_2a031"]
+[ext_resource type="AudioStream" uid="uid://swy2dfdchmjm" path="res://SFX/Armor-break/Metal Impact Medium A.wav" id="2_o58ej"]
+[ext_resource type="AudioStream" uid="uid://c6eubyidqqb1a" path="res://SFX/Armor-break/Metal Impact Medium B.wav" id="3_rcste"]
+[ext_resource type="AudioStream" uid="uid://ca0lsqhjko001" path="res://SFX/Armor-break/Metal Impact Medium C.wav" id="4_b5lbu"]
+[ext_resource type="AudioStream" uid="uid://b6jyjk4reo5t6" path="res://SFX/Armor-break/Metal Impact Medium D.wav" id="5_33jas"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qbu1g"]
 random_pitch = 1.6817927
 random_volume_offset_db = 5.0
 streams_count = 5
-stream_0/stream = ExtResource("1_53i8i")
-stream_1/stream = ExtResource("2_raj8y")
-stream_2/stream = ExtResource("3_qrwvb")
-stream_3/stream = ExtResource("4_cgol1")
-stream_4/stream = ExtResource("5_064dj")
+stream_0/stream = ExtResource("1_2a031")
+stream_1/stream = ExtResource("2_o58ej")
+stream_2/stream = ExtResource("3_rcste")
+stream_3/stream = ExtResource("4_b5lbu")
+stream_4/stream = ExtResource("5_33jas")
 
 [node name="ArmorBreakSFX" type="AudioStreamPlayer" unique_id=1619799722]
+process_mode = 3
 stream = SubResource("AudioStreamRandomizer_qbu1g")
 bus = &"SFX"

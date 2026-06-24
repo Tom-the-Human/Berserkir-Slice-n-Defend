@@ -9,6 +9,10 @@ var is_swiping := false
 var swipe_start_pos := Vector2.ZERO
 var swipe_end_pos := Vector2.ZERO
 
+var is_hovering := false
+var normal_color := Color.WHITE
+var hover_color := Color.RED
+
 func _ready() -> void:
 	# style line as weapon trail
 	width = 8.0
@@ -40,17 +44,33 @@ func _input(event: InputEvent) -> void:
 		if get_point_count() > max_points:
 			remove_point(0)
 	
-		# preemptive raycast to trigger SFX
-		#var enemies = get_tree().get_nodes_in_group("enemies")
-		#for enemy in enemies:
-			# Verify enemy is in the Hit Zone and audio has not already fired
-			#if enemy.progress >= 0.75 and not enemy.impact_audio_played:
+		# raycast for FX
+		var newly_hovering = false
+		var enemies = get_tree().get_nodes_in_group("enemies")
+		for enemy in enemies:
+			# verify enemy is in Hit Zone
+			if enemy.progress >= 0.75:
 				# Define approximate bounding box (scale 100x100 relative to center)
-				#var rect = Rect2(enemy.global_position - Vector2(50, 50), Vector2(100, 100))
-
+				var rect = Rect2(enemy.global_position - Vector2(50, 50), Vector2(100, 100))
+				if _segment_intersects_rect(previous_point, event.position, rect):
+					newly_hovering = true
+					break
+		# state machine to trigger eggects only once when entering/exiting target
+		if newly_hovering and not is_hovering:
+			is_hovering = true
+			default_color = hover_color
+			# trigger vibration
+			Input.vibrate_handheld(10)
+		elif not newly_hovering and is_hovering:
+			is_hovering = false
+			default_color = normal_color
 
 func trigger_slice() -> void:
 	var distance := swipe_start_pos.distance_to(swipe_end_pos)
 	# test that it's long enough to be a valid attack (tweak?)
 	if distance > 50.0:
 		swipe_completed.emit(points)
+
+func _segment_intersects_rect(p1: Vector2, p2: Vector2, rect: Rect2) -> bool:
+	if rect.has_point(p1) or rect.has_point(p2): return true
+	return false
