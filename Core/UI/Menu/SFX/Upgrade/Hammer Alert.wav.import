@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dbvn7jn87wbxu"
-path="res://.godot/imported/Hammer Alert.wav-8ffc7bd02c15ba1e0bb1dd090edf148c.sample"
+path="res://.godot/imported/Hammer Alert.wav-9031f82bb80566da829e1699bb061a06.sample"
 
 [deps]
 
-source_file="res://SFX/Menu-SFX/Upgrade/Hammer Alert.wav"
-dest_files=["res://.godot/imported/Hammer Alert.wav-8ffc7bd02c15ba1e0bb1dd090edf148c.sample"]
+source_file="res://Core/UI/Menu/SFX/Upgrade/Hammer Alert.wav"
+dest_files=["res://.godot/imported/Hammer Alert.wav-9031f82bb80566da829e1699bb061a06.sample"]
 
 [params]
 

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cr7auwplc84t6"]
 
-[ext_resource type="Script" uid="uid://hvrd4otk1aj2" path="res://VFX/wood_spray.gd" id="1_bbiug"]
+[ext_resource type="Script" uid="uid://hvrd4otk1aj2" path="res://Enemy-sys/wood_spray.gd" id="1_ei0nr"]
 
 [node name="WoodSpray" type="CPUParticles2D" unique_id=351144879]
 emitting = false
@@ -10,4 +10,4 @@ explosiveness = 0.97
 angle_min = -720.0
 angle_max = 720.0
 color = Color(0.54509807, 0.3529412, 0.16862746, 1)
-script = ExtResource("1_bbiug")
+script = ExtResource("1_ei0nr")

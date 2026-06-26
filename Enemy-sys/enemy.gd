@@ -96,7 +96,7 @@ func apply_cut(swipe_points: PackedVector2Array, remaining_pierces: int, swipe_d
 			get_tree().current_scene.add_child(audio)
 			audio.play()
 		if get_tree().current_scene.has_method("trigger_hit_stop"):
-			get_tree().current_scene.trigger_hit_stop
+			get_tree().current_scene.trigger_hit_stop()
 		var hit_shield_rb = shield.apply_cut(swipe_points, swipe_dir)
 		if hit_shield_rb:
 			remaining_pierces -= 1
@@ -118,7 +118,7 @@ func apply_cut(swipe_points: PackedVector2Array, remaining_pierces: int, swipe_d
 			get_tree().current_scene.add_child(audio)
 			audio.play()
 		if get_tree().current_scene.has_method("trigger_hit_stop"):
-			get_tree().current_scene.trigger_hit_stop
+			get_tree().current_scene.trigger_hit_stop()
 		var hit_armor = armor.apply_cut(swipe_points, swipe_dir)
 		if hit_armor:
 			remaining_pierces -= 1
@@ -133,7 +133,7 @@ func apply_cut(swipe_points: PackedVector2Array, remaining_pierces: int, swipe_d
 			get_tree().current_scene.add_child(audio)
 			audio.play()
 		if get_tree().current_scene.has_method("trigger_hit_stop"):
-			get_tree().current_scene.trigger_hit_stop
+			get_tree().current_scene.trigger_hit_stop()
 		var hit_body_rb = body.apply_cut(swipe_points, swipe_dir)
 		if hit_body_rb:
 			remaining_pierces -= 1

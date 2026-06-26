@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://7l7fsx06rfic"
-path="res://.godot/imported/Sword B.wav-34c63dfea3ef01cbc4187dad5bbb1577.sample"
+path="res://.godot/imported/Sword B.wav-15d69e4a668d11398758bb85e8ac9cbd.sample"
 
 [deps]
 
-source_file="res://SFX/Menu-SFX/Upgrade/Sword B.wav"
-dest_files=["res://.godot/imported/Sword B.wav-34c63dfea3ef01cbc4187dad5bbb1577.sample"]
+source_file="res://Core/UI/Menu/SFX/Upgrade/Sword B.wav"
+dest_files=["res://.godot/imported/Sword B.wav-15d69e4a668d11398758bb85e8ac9cbd.sample"]
 
 [params]
 

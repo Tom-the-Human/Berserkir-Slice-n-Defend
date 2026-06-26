@@ -240,19 +240,19 @@ func _on_buy_berserk_trance_button_pressed() -> void:
 	if Global.attempt_purchase(Global.berserk_trance):
 		refresh_store_ui()
 		# placeholder (print to screen instead)
-		print("Berserk Trance Upgraded! Max HP: ", Global.berserk_trance.value)
+		print("Berserk Trance Upgraded! Max HP: +", Global.berserk_trance.value)
 
 func _on_buy_axe_bite_button_pressed() -> void:
 	if Global.attempt_purchase(Global.axe_bite):
 		refresh_store_ui()
 		# placeholder (print to screen instead)
-		print("Axe Bite Upgraded! Penetration: ", Global.axe_bite.value)
+		print("Axe Bite Upgraded! Penetration: +", Global.axe_bite.value)
 
 func _on_buy_brute_force_button_pressed() -> void:
 	if Global.attempt_purchase(Global.brute_force):
 		refresh_store_ui()
 		# placeholder (print to screen instead)
-		print("Brute Force Upgraded! Knockback: ", Global.brute_force.value)
+		print("Brute Force Upgraded! Knockback: +", Global.brute_force.value)
 
 func _on_store_back_button_pressed() -> void:
 	upgrade_store.hide()

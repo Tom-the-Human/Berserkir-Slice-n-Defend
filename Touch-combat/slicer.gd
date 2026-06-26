@@ -2,10 +2,10 @@ class_name Slicer
 extends Node
 
 # takes target shape and swipe coords, returns array of resulting sliced shapes
-static func slice_polygon_curved(target_poly: PackedVector2Array, swipe_points: PackedVector2Array, thickness: float = 10.0) -> Array[PackedVector2Array]:
+static func slice_polygon_curved(target_poly: PackedVector2Array, swipe_points: PackedVector2Array, thickness: float = 5.0) -> Array[PackedVector2Array]:
 	# expand the swipe path into a thick polygon
 	# use JOIN_ROUND to handle sharp turns in the swipe curve
-	var blade_poly := Geometry2D.offset_polyline(swipe_points, thickness / 2.0, Geometry2D.JOIN_ROUND, Geometry2D.END_ROUND)
+	var blade_poly := Geometry2D.offset_polyline(swipe_points, thickness / 2.0, Geometry2D.JOIN_MITER, Geometry2D.END_ROUND)
 	var intersection := Geometry2D.intersect_polygons(target_poly, blade_poly[0])
 	# if swipe is too short/degenerate, or if no valid targets are hit, return a miss
 	if blade_poly.is_empty() or intersection.is_empty():

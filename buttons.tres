@@ -1,0 +1,63 @@
+[gd_resource type="Theme" format=3 uid="uid://b2gj41kgrhxo2"]
+
+[ext_resource type="Texture2D" uid="uid://cq4qgnpntflol" path="res://Core/UI/graphics/32x32-Tilesheet.png" id="1_e2bhe"]
+[ext_resource type="FontFile" uid="uid://vhnwqqqhgkty" path="res://Core/UI/Darinia.ttf" id="2_p7txh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5qsh"]
+atlas = ExtResource("1_e2bhe")
+region = Rect2(320, 106, 32, 15)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i2ujt"]
+texture = SubResource("AtlasTexture_f5qsh")
+texture_margin_left = 10.0
+texture_margin_top = 5.0
+texture_margin_right = 10.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rq111"]
+atlas = ExtResource("1_e2bhe")
+region = Rect2(128, 104, 64, 19)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5eotj"]
+texture = SubResource("AtlasTexture_rq111")
+texture_margin_left = 10.0
+texture_margin_top = 5.0
+texture_margin_right = 10.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_krywf"]
+atlas = ExtResource("1_e2bhe")
+region = Rect2(64, 104, 64, 19)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m6ddu"]
+texture = SubResource("AtlasTexture_krywf")
+texture_margin_left = 10.0
+texture_margin_top = 5.0
+texture_margin_right = 10.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mejah"]
+atlas = ExtResource("1_e2bhe")
+region = Rect2(0, 104, 64, 19)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xx1cl"]
+texture = SubResource("AtlasTexture_mejah")
+texture_margin_left = 10.0
+texture_margin_top = 5.0
+texture_margin_right = 10.0
+texture_margin_bottom = 5.0
+
+[resource]
+resource_local_to_scene = true
+default_font = ExtResource("2_p7txh")
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_disabled_color = Color(0.60933006, 0.6093301, 0.60933006, 1)
+Button/colors/font_focus_color = Color(0.82069, 0.153025, 0.16559607, 1)
+Button/colors/font_hover_color = Color(0.81960785, 0.15294118, 0.16470589, 1)
+Button/colors/icon_focus_color = Color(0.81960785, 0.15294118, 0.16470589, 1)
+Button/colors/icon_hover_color = Color(0.81960785, 0.15294118, 0.16470589, 1)
+Button/font_sizes/font_size = 40
+Button/styles/disabled = SubResource("StyleBoxTexture_i2ujt")
+Button/styles/hover = SubResource("StyleBoxTexture_5eotj")
+Button/styles/normal = SubResource("StyleBoxTexture_m6ddu")
+Button/styles/pressed = SubResource("StyleBoxTexture_xx1cl")

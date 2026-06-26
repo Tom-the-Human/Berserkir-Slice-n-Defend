@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cswtjdju6m1dd"
-path="res://.godot/imported/sword_sharpen.wav-b478b121d982d1ccc6cc98ddc9bd18af.sample"
+path="res://.godot/imported/sword_sharpen.wav-fc86dbadf41eaa5a054df726d58ddaac.sample"
 
 [deps]
 
-source_file="res://SFX/Menu-SFX/Upgrade/sword_sharpen.wav"
-dest_files=["res://.godot/imported/sword_sharpen.wav-b478b121d982d1ccc6cc98ddc9bd18af.sample"]
+source_file="res://Core/UI/Menu/SFX/Upgrade/sword_sharpen.wav"
+dest_files=["res://.godot/imported/sword_sharpen.wav-fc86dbadf41eaa5a054df726d58ddaac.sample"]
 
 [params]
 

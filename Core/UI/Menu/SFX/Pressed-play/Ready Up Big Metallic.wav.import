@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cn7ly1dod8sqa"
-path="res://.godot/imported/Ready Up Big Metallic.wav-df98de77cd371c0abfd39aa380ff6354.sample"
+path="res://.godot/imported/Ready Up Big Metallic.wav-af9483cf481810c9f8acc68dbe970e6a.sample"
 
 [deps]
 
-source_file="res://SFX/Menu-SFX/Pressed-play/Ready Up Big Metallic.wav"
-dest_files=["res://.godot/imported/Ready Up Big Metallic.wav-df98de77cd371c0abfd39aa380ff6354.sample"]
+source_file="res://Core/UI/Menu/SFX/Pressed-play/Ready Up Big Metallic.wav"
+dest_files=["res://.godot/imported/Ready Up Big Metallic.wav-af9483cf481810c9f8acc68dbe970e6a.sample"]
 
 [params]
 
