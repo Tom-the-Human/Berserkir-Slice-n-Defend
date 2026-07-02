@@ -334,16 +334,19 @@ layout_mode = 2
 text = "Available Glory: 0"
 
 [node name="BuyBerserkTranceButton" type="Button" parent="UIManager/UpgradeStore/VBoxContainer" unique_id=452914021]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Berserker Trance
 (max health + 10)"
 
 [node name="BuyAxeBiteButton" type="Button" parent="UIManager/UpgradeStore/VBoxContainer" unique_id=1773702508]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Axe Bite
 (piercing + 1)"
 
 [node name="BuyBruteForceButton" type="Button" parent="UIManager/UpgradeStore/VBoxContainer" unique_id=85892649]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Brute Force
 (knockback + 1)"

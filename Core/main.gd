@@ -11,6 +11,9 @@ extends Node2D
 @onready var game_over_screen = %GameOverScreen
 @onready var upgrade_store = %UpgradeStore
 @onready var glory_wallet_label = %GloryWalletLabel
+@onready var buy_berserk_trance_button = %BuyBerserkTranceButton
+@onready var buy_axe_bite_button = %BuyAxeBiteButton
+@onready var buy_brute_force_button = %BuyBruteForceButton
 @onready var stats_label = %StatsLabel # shown at game over (probably rename)
 
 @onready var screen_blood = $UIManager/ScreenBlood
@@ -243,6 +246,9 @@ func _on_menu_button_pressed() -> void:
 
 func refresh_store_ui() -> void:
 	glory_wallet_label.text = "Available Glory: " + str(Global.current_glory)
+	buy_berserk_trance_button.disabled = not Global.can_afford(Global.berserk_trance)
+	buy_axe_bite_button.disabled = not Global.can_afford(Global.axe_bite)
+	buy_brute_force_button.disabled = not Global.can_afford(Global.brute_force)
 
 func _on_buy_berserk_trance_button_pressed() -> void:
 	if Global.attempt_purchase(Global.berserk_trance):
