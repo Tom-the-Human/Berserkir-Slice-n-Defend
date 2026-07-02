@@ -28,8 +28,12 @@ var run_time_seconds := 0.0
 func _ready() -> void:
 	pacing_timer.timeout.connect(_on_pacing_update)
 	spawn_timer.timeout.connect(_spawn_enemy)
-	
+
 	spawn_timer.start(2.0)
+
+func reset() -> void:
+	run_time_seconds = 0.0
+	spawn_timer.wait_time = 2.0
 
 func _on_pacing_update() -> void:
 	run_time_seconds += 1.0

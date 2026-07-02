@@ -91,14 +91,16 @@ func apply_cut(swipe_points: PackedVector2Array, remaining_pierces: int, swipe_d
 	# check for shield
 	var shield = get_node_or_null("Shield")
 	if remaining_pierces > 0 and shield and not shield.is_broken:
-		if shield_break_sfx:
-			var audio = shield_break_sfx.instantiate()
-			get_tree().current_scene.add_child(audio)
-			audio.play()
-		if get_tree().current_scene.has_method("trigger_hit_stop"):
-			get_tree().current_scene.trigger_hit_stop()
-		var hit_shield_rb = shield.apply_cut(swipe_points, swipe_dir)
+		# +1 z_index so a falling shield doesn't drop behind the enemy sprite
+		var hit_shield_rb = shield.apply_cut(swipe_points, swipe_dir, 1)
 		if hit_shield_rb:
+			if shield_break_sfx:
+				var audio = shield_break_sfx.instantiate()
+				get_tree().current_scene.add_child(audio)
+				audio.finished.connect(audio.queue_free)
+				audio.play()
+			if get_tree().current_scene.has_method("trigger_hit_stop"):
+				get_tree().current_scene.trigger_hit_stop()
 			remaining_pierces -= 1
 			parts_hit += 1
 			if wood_spray_scene:
@@ -113,14 +115,15 @@ func apply_cut(swipe_points: PackedVector2Array, remaining_pierces: int, swipe_d
 	# check for armor
 	var armor = get_node_or_null("Armor")
 	if remaining_pierces > 0 and armor and not armor.is_broken:
-		if armor_break_sfx:
-			var audio = armor_break_sfx.instantiate()
-			get_tree().current_scene.add_child(audio)
-			audio.play()
-		if get_tree().current_scene.has_method("trigger_hit_stop"):
-			get_tree().current_scene.trigger_hit_stop()
 		var hit_armor = armor.apply_cut(swipe_points, swipe_dir)
 		if hit_armor:
+			if armor_break_sfx:
+				var audio = armor_break_sfx.instantiate()
+				get_tree().current_scene.add_child(audio)
+				audio.finished.connect(audio.queue_free)
+				audio.play()
+			if get_tree().current_scene.has_method("trigger_hit_stop"):
+				get_tree().current_scene.trigger_hit_stop()
 			remaining_pierces -= 1
 			parts_hit += 1
 	
@@ -128,14 +131,15 @@ func apply_cut(swipe_points: PackedVector2Array, remaining_pierces: int, swipe_d
 	# if no protection
 	var body = get_node_or_null("Body")
 	if remaining_pierces > 0 and body and not body.is_broken:
-		if body_break_sfx:
-			var audio = body_break_sfx.instantiate()
-			get_tree().current_scene.add_child(audio)
-			audio.play()
-		if get_tree().current_scene.has_method("trigger_hit_stop"):
-			get_tree().current_scene.trigger_hit_stop()
 		var hit_body_rb = body.apply_cut(swipe_points, swipe_dir)
 		if hit_body_rb:
+			if body_break_sfx:
+				var audio = body_break_sfx.instantiate()
+				get_tree().current_scene.add_child(audio)
+				audio.finished.connect(audio.queue_free)
+				audio.play()
+			if get_tree().current_scene.has_method("trigger_hit_stop"):
+				get_tree().current_scene.trigger_hit_stop()
 			remaining_pierces -= 1
 			parts_hit += 1
 			if blood_spray_scene:
@@ -147,7 +151,7 @@ func apply_cut(swipe_points: PackedVector2Array, remaining_pierces: int, swipe_d
 				blood.z_index = z_index + 1
 				blood.spray(swipe_dir, scale.x)
 				get_tree().current_scene.trigger_screen_splatter()
-			die()
+			die(hit_body_rb, swipe_dir)
 	
 	if parts_hit > 0 and not is_queued_for_deletion():
 		apply_knockback()
@@ -170,6 +174,19 @@ func apply_knockback() -> void:
 		in_hit_zone = false
 		outline_line.width = 0.0
 
-func die() -> void:
+func die(body_rb: RigidBody2D, swipe_dir: Vector2) -> void:
+	# any still-intact shield/armor would otherwise vanish along with the enemy -
+	# drop them as falling pieces instead. Armor is welded onto the body's own
+	# piece so it falls with it exactly (two independent rigidbodies would drift
+	# apart), a shield falls on its own with its own knocked-off/dropped impulse.
+	var armor = get_node_or_null("Armor")
+	if armor and not armor.is_broken:
+		armor.attach_to(body_rb)
+
+	var shield = get_node_or_null("Shield")
+	if shield and not shield.is_broken:
+		# +1 z_index so it doesn't drop behind the enemy sprite
+		shield.detach_and_fall(swipe_dir, 1)
+
 	killed.emit()
 	queue_free()

@@ -3,9 +3,15 @@
 [ext_resource type="Script" uid="uid://dy65iu1ob0qtg" path="res://Touch-combat/swipe_trail.gd" id="1_5yh6k"]
 [ext_resource type="Script" uid="uid://b5kwfsfh38w6m" path="res://Core/main.gd" id="1_cj3ed"]
 [ext_resource type="PackedScene" uid="uid://qnlp2lgq410r" path="res://Enemy-sys/housecarl.tscn" id="2_n0dd3"]
+[ext_resource type="Texture2D" uid="uid://bua0sxlg20yn2" path="res://Core/background-graphics/1.png" id="3_ldj6c"]
 [ext_resource type="Script" uid="uid://g7lf3ba4rkob" path="res://Core/spawn_director.gd" id="4_avlqc"]
+[ext_resource type="Texture2D" uid="uid://c8qsibxokfnkb" path="res://Core/background-graphics/3.png" id="4_drbnu"]
+[ext_resource type="Texture2D" uid="uid://dkeol0i35on78" path="res://Core/background-graphics/4.png" id="5_avw2k"]
+[ext_resource type="Texture2D" uid="uid://lpd3tvbs044e" path="res://Core/background-graphics/Plan-3.png" id="5_f2flb"]
 [ext_resource type="PackedScene" uid="uid://bun0584ros584" path="res://Enemy-sys/peasant.tscn" id="5_okbgg"]
 [ext_resource type="PackedScene" uid="uid://r8b4i7cgbtyu" path="res://Enemy-sys/spearman.tscn" id="6_84tve"]
+[ext_resource type="Texture2D" uid="uid://ccfm35bkjy4v7" path="res://Core/background-graphics/Plan-2.png" id="6_avw2k"]
+[ext_resource type="Texture2D" uid="uid://uwji7if7l07w" path="res://Core/background-graphics/Plan-1.png" id="7_1fley"]
 [ext_resource type="Shader" uid="uid://dapbwnu5tjnlo" path="res://Core/screen_blood.gdshader" id="7_okbgg"]
 [ext_resource type="Shader" uid="uid://be3wbsm1760l" path="res://Core/damage_flash.gdshader" id="8_84tve"]
 [ext_resource type="Script" uid="uid://cq5sreblq5rnd" path="res://OvaniPlugin/OvaniPlayer.gd" id="9_ua6uo"]
@@ -17,8 +23,8 @@
 [ext_resource type="Texture2D" uid="uid://xlg1oftd72nj" path="res://Core/UI/graphics/Icons/icon_jump.png" id="12_yabue"]
 [ext_resource type="Texture2D" uid="uid://ctbihjh0yxmuq" path="res://Core/UI/graphics/Icons/icon_cog.png" id="13_0vun1"]
 [ext_resource type="AudioStream" uid="uid://ffvb6a7smh6w" path="res://SFX/Player-damage/Strike Blade Medium 002.wav" id="13_mprhp"]
-[ext_resource type="Texture2D" uid="uid://j40i7vucg52s" path="res://Core/UI/graphics/Icons/icon_menu.png" id="14_coowd"]
 [ext_resource type="AudioStream" uid="uid://dt0b5x6wxfu6q" path="res://SFX/Player-damage/Strike Blade Medium 003.wav" id="14_tl35v"]
+[ext_resource type="Texture2D" uid="uid://de1yrf26ta161" path="res://Core/UI/graphics/Icons/icon_star.png" id="14_yabue"]
 [ext_resource type="AudioStream" uid="uid://dk3nrrqfkieyg" path="res://SFX/Player-damage/Strike Blade Medium 004.wav" id="15_e2c72"]
 [ext_resource type="AudioStream" uid="uid://c05x5588widyi" path="res://SFX/Player-damage/Strike Blade Medium 005.wav" id="16_srhnv"]
 [ext_resource type="AudioStream" uid="uid://38d4tcvjg2ci" path="res://SFX/Environmental/River Close A.wav" id="17_mprhp"]
@@ -52,6 +58,34 @@ stream_4/stream = ExtResource("16_srhnv")
 y_sort_enabled = true
 script = ExtResource("1_cj3ed")
 music = ExtResource("11_27hw8")
+
+[node name="BackgroundManager" type="Node2D" parent="." unique_id=1553203329]
+position = Vector2(1702, 962)
+scale = Vector2(6, 6)
+
+[node name="Sky" type="Sprite2D" parent="BackgroundManager" unique_id=2101847102]
+position = Vector2(-303.6667, -145.33334)
+texture = ExtResource("3_ldj6c")
+
+[node name="Clouds" type="Sprite2D" parent="BackgroundManager" unique_id=1824693039]
+position = Vector2(-56.500008, -47.166664)
+texture = ExtResource("4_drbnu")
+
+[node name="Clouds2" type="Sprite2D" parent="BackgroundManager" unique_id=690413535]
+position = Vector2(-96.49999, -157.66666)
+texture = ExtResource("5_avw2k")
+
+[node name="Hills" type="Sprite2D" parent="BackgroundManager" unique_id=1117118785]
+position = Vector2(-123.333, 0)
+texture = ExtResource("5_f2flb")
+
+[node name="Trees" type="Sprite2D" parent="BackgroundManager" unique_id=229340921]
+position = Vector2(-294.833, 0)
+texture = ExtResource("6_avw2k")
+
+[node name="Grass" type="Sprite2D" parent="BackgroundManager" unique_id=1512518647]
+position = Vector2(-247.83334, 0)
+texture = ExtResource("7_1fley")
 
 [node name="SwipeTrail" type="Line2D" parent="." unique_id=45593343]
 z_index = 150
@@ -94,7 +128,6 @@ grow_vertical = 2
 
 [node name="HUD" type="Control" parent="UIManager" unique_id=390099392]
 unique_name_in_owner = true
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -115,6 +148,7 @@ size_flags_vertical = 0
 alignment = 1
 
 [node name="HUDStatsLabel" type="Label" parent="UIManager/HUD/MarginContainer/HBoxContainer" unique_id=835357425]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "HP: 100 | Glory: 0"
@@ -134,6 +168,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UIManager/MainMenu" unique_id=1833802800]
 layout_mode = 1
@@ -179,7 +215,7 @@ icon_alignment = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Credits"
-icon = ExtResource("14_coowd")
+icon = ExtResource("14_yabue")
 icon_alignment = 2
 
 [node name="PauseScreen" type="Control" parent="UIManager" unique_id=1399261238]
@@ -227,9 +263,18 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UIManager/GameOverScreen" unique_id=136976009]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -185.0
+offset_top = -100.0
+offset_right = 185.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MessageLabel" type="Label" parent="UIManager/GameOverScreen/VBoxContainer" unique_id=814011263]
 layout_mode = 2
@@ -256,20 +301,28 @@ text = "Main Menu"
 unique_name_in_owner = true
 visible = false
 layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIManager/UpgradeStore" unique_id=563822460]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -187.0
+offset_right = 220.0
+offset_bottom = 187.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UIManager/UpgradeStore" unique_id=563822460]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="StoreTitleLabel" type="Label" parent="UIManager/UpgradeStore/VBoxContainer" unique_id=1392406705]
 layout_mode = 2

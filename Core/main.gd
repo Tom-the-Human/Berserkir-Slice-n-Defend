@@ -5,6 +5,7 @@ extends Node2D
 
 @onready var ui_manager = $UIManager
 @onready var hud = %HUD
+@onready var hud_stats_label = %HUDStatsLabel
 @onready var main_menu =  %MainMenu
 @onready var pause_screen = %PauseScreen
 @onready var game_over_screen = %GameOverScreen
@@ -63,16 +64,18 @@ func start_new_run() -> void:
 	run_kills = 0
 	run_start_time = Time.get_ticks_msec()
 	player_health = Global.max_health
-	
+	update_hud_stats()
+
 	music_player.Intensity = 0.25 # intensity 2 = 0.5
 	music_player.FadeIntensity(1.0, 90.0)
-	
-	
+
+
 	main_menu.hide()
 	game_over_screen.hide()
 	hud.show()
 	
 	get_tree().paused = false
+	$SpawnDirector.reset()
 	$SpawnDirector/PacingTimer.start()
 	$SpawnDirector/SpawnTimer.start()
 
@@ -125,8 +128,8 @@ func trigger_hit_stop() -> void:
 	
 	# freeze frame
 	get_tree().paused = true
-	# wait 50ms, `true` keeps timer ticking during pause
-	await get_tree().create_timer(0.12, true).timeout
+	# wait a fraction of a second, `true` keeps timer ticking during pause
+	await get_tree().create_timer(0.14, true).timeout
 	# unfreeze, del flash
 	get_tree().paused = false
 	flash.queue_free()
@@ -138,6 +141,7 @@ func trigger_hit_stop() -> void:
 func _on_player_damaged(damage: int) -> void:
 	$CombatAudio/TakeDamageSFX.play()
 	player_health -= damage
+	update_hud_stats()
 	trigger_player_hit_vfx()
 	# debug/placeholder
 	print("Hit! Player health now ", player_health)
@@ -187,6 +191,10 @@ func _on_enemy_killed() -> void:
 func _on_part_broken() -> void:
 	run_glory += 1
 	Global.total_glory += 1
+	update_hud_stats()
+
+func update_hud_stats() -> void:
+	hud_stats_label.text = "HP: %d | Glory: %d" % [player_health, run_glory]
 
 func trigger_screen_splatter() -> void:
 	screen_blood.show()
